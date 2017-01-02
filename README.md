@@ -45,4 +45,5 @@ https://trello.com/b/p3CSxi9l/brendancare
 
 ## Wireframes
 ---
-*Will be available upon request, and included in the project repo once created.
+*Will be available upon request, and included in the project repo once created.*
+[Here they are](https://github.com/guineveresaenger/sit-in-peace/tree/master/wireframes)
