@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170102234553) do
+ActiveRecord::Schema.define(version: 20170103045403) do
 
   create_table "appointments", force: :cascade do |t|
     t.string   "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.boolean  "covered"
+    t.boolean  "covered",     default: false
     t.integer  "parent_id"
     t.integer  "sitter_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "appointments", ["parent_id"], name: "index_appointments_on_parent_id"
