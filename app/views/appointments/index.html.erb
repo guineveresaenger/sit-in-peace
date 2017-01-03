@@ -1,6 +1,42 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Appointments</h1>
+<% start_date = params.fetch(:start_date, Date.today).to_date %>
+<% date_range = (start_date.beginning_of_week..start_date.end_of_week).to_a %>
+<%= link_to "Previous", start_date: (date_range.first - 1.day) %>
+<%= link_to "Next", start_date: (date_range.last + 1.day) %>
+<%= link_to "This week", start_date: Date.today %>
+
+
+<table>
+  <thead>
+    <tr>
+      <% date_range.each do |day| %>
+        <th><%= I18n.t('date.day_names')[day.wday] %></th>
+      <% end %>
+
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <% date_range.each do |day| %>
+
+          <td id="<%= day %>">
+            <%= day %>
+            <% hours = %w(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23) %>
+            <% hours.each do |hour|%>
+              <div class="<%= hour %>">
+                <%= hour %>
+              </div>
+            <% end %>
+
+          </td>
+        <% end %>
+      </tr>
+
+  </tbody>
+</table>
+
 
 <table>
   <thead>
