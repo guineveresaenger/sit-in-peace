@@ -5,7 +5,7 @@ gem 'react-rails'
 # Can set up controller to talk to JSON
 gem 'responders'
 # Use simple_calendar to generate calendar views
-gem "simple_calendar", "~> 2.0"
+#gem "simple_calendar", "~> 2.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
