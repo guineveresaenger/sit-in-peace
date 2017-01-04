@@ -21,6 +21,7 @@ var Week = React.createClass({
 
         {hours}
         Hello
+        <AllAppointments />
 
       </div>
     )
