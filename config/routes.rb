@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root to: "site#index"
+
+
   resources :sitters
   resources :parents
   resources :appointments

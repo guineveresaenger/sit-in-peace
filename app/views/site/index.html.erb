@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Appointments</h1>
+
+
+<% start_date = Date.today %>
+<% date_range = (start_date.beginning_of_week..start_date.end_of_week).to_a %>
+
+
+<%= react_component 'Week', {startOfWeek: date_range.first, dateRange: date_range}  %>
