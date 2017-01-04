@@ -1,10 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Appointments</h1>
-<%# date = DateTime.new(2007,11,19,8,37) %>
-<%#  hour = date.strftime("hours are %H")%>
-<h2><%# date %></h2>
-
 
 <% start_date = Date.today %>
 <% date_range = (start_date.beginning_of_week..start_date.end_of_week).to_a %>

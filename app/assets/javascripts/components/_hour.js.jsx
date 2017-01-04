@@ -23,19 +23,10 @@ var Hour = React.createClass({
             dayDate={this.props.dateRange[i]}
             thisHourAppts={this.filterByHour()}
              />
-
         </div>
       );
     }
-    var appts = this.props.thisWeekAppts.map((appt) =>{
-      return (
-        <div key={appt.id}>
-          <h5>{appt.start_time}</h5>
-          <p>{appt.description}</p>
-        </div>
-      )
 
-    });
     return (
       <div className="row small-up-7">
         <p>{this.props.hourName}</p>
