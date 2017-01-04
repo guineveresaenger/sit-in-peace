@@ -4,27 +4,30 @@ var Week = React.createClass({
   },
   componentDidMount() {
     $.getJSON('/api/v1/appointments.json', (response) => {
-      console.log(response[0].id);
       this.setState({ appointments: response})
     });
   },
 
   filterByWeek() {
     var range = this.props.dateRange;
+    // iterate over appts and see if they match the dates in our range
     var thisWeekAppts = []; this.state.appointments.map((appt) => {
       for(var i = 0; i < range.length; i++){
         if(appt.start_time.substr(0,10) == range[i].substr(0,10)){
           thisWeekAppts.push(appt);
-        } else {
         }
       }
-
-
     });
-    console.log(thisWeekAppts);
     return thisWeekAppts;
   },
 
+  // assignHour() {
+  //   this.state.appointments.map((appt) => {
+  //     var hour = appt.start_time.substr(10,12);
+  //     console.log(hour);
+  //     appt.setState({startHour: hour})
+  //   });
+  // },
 
   render() {
     // make 24 table rows!
@@ -35,7 +38,8 @@ var Week = React.createClass({
           <Hour hourName={i}
             startOfWeek={this.props.startOfWeek}
             dateRange={this.props.dateRange}
-            />
+            thisWeekAppts={this.filterByWeek()}
+          />
 
         </div>
       );
@@ -53,7 +57,6 @@ var Week = React.createClass({
         <p>
           {this.props.start_of_week}
         </p>
-
         {hours}
         Hello
         {appts}
