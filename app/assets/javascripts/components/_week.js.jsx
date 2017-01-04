@@ -21,13 +21,7 @@ var Week = React.createClass({
     return thisWeekAppts;
   },
 
-  // assignHour() {
-  //   this.state.appointments.map((appt) => {
-  //     var hour = appt.start_time.substr(10,12);
-  //     console.log(hour);
-  //     appt.setState({startHour: hour})
-  //   });
-  // },
+
 
   render() {
     // make 24 table rows!
@@ -54,14 +48,9 @@ var Week = React.createClass({
     });
     return (
       <div>
-        <p>
-          {this.props.start_of_week}
-        </p>
+        <WeekdayLabels/>
         {hours}
-        Hello
         {appts}
-
-
       </div>
     )
   }

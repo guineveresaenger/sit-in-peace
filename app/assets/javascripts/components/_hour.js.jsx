@@ -28,11 +28,13 @@ var Hour = React.createClass({
     }
 
     return (
-      <div className="row small-up-7">
-        <p>{this.props.hourName}</p>
 
+
+      <div className="row small-up-8">
+        <div className="column">
+        {this.props.hourName}
+        </div>
         {days}
-
       </div>
     )
   }
