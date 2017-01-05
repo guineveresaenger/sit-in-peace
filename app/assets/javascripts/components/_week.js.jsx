@@ -8,6 +8,12 @@ var Week = React.createClass({
     });
   },
 
+  handleSubmit(appointment){
+    var newState = this.state.appointments.concat(appointment);
+    this.setState({ appointments: newState });
+    console.log("submitted this appointment: " + appointment);
+  },
+
   filterByWeek() {
     var range = this.props.dateRange;
     // iterate over appts and see if they match the dates in our range
@@ -50,7 +56,7 @@ var Week = React.createClass({
     });
     return (
       <div>
-        <NewAppointment />
+        <NewAppointment handleSubmit={this.handleSubmit}/>
         <WeekdayLabels dateRange={this.props.dateRange}/>
         {hours}
         {appts}

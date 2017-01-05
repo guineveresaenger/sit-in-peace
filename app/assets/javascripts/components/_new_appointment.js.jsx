@@ -15,8 +15,8 @@ var NewAppointment = React.createClass({
       url: '/api/v1/appointments',
       type: 'POST',
       data: {appointment: {start_time: completeTime, description: description}},
-      success: (response) => {
-        console.log("yay it worked!", response);
+      success: (appointment) => {
+        this.props.handleSubmit(appointment)
       }
     })
   },
