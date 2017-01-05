@@ -2,15 +2,23 @@ var NewAppointment = React.createClass({
   handleClick(){
     var date = this.refs.date.value;
     var hour = this.refs.hour.value;
-
-    //now use Moment to format this shit into a valid date...grrr...UGH
-
-    var completeTime = moment(date + "T" + hour).toDate().toJSON();
-    console.log("this is the Time object I hope: " + completeTime);
-
     var description = this.refs.description.value;
+    // TODO: customize input form so it allows only correctly formatted date
+    // TODO: validate inputs in general
 
-    console.log('the date is ' + date + ' and the time is '+ hour + ' and the description is ' + description );
+    // use Moment.js to format into a valid date
+    var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
+    console.log("this is the day: " + date);
+    console.log("this is the hour: " + hour);
+    console.log("this is the formatted time " + completeTime);
+    $.ajax({
+      url: '/api/v1/appointments',
+      type: 'POST',
+      data: {appointment: {start_time: completeTime, description: description}},
+      success: (response) => {
+        console.log("yay it worked!", response);
+      }
+    })
   },
   render() {
     return (
