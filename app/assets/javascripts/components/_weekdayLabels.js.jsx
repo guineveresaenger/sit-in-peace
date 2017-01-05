@@ -9,7 +9,7 @@ var WeekdayLabels = React.createClass({
       labels.push(
         <div className="slot column day-header" key={days[i]}>
           <h5>{days[i]}</h5>
-          {dates[i]}
+          {dates[i].substr(0,10)}
         </div>
       )
     }

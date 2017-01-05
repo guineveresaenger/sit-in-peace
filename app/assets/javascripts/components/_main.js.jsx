@@ -1,6 +1,8 @@
+
+
 var Main = React.createClass({
   getInitialState() {
-    return {date: new Date()}
+    return {date: moment().toJSON()}
   },
 
   handleClick(){
@@ -8,16 +10,20 @@ var Main = React.createClass({
   },
 
   render(){
-  
+    var startOfWeek = moment(this.state.date).startOf('isoweek').toDate().toJSON();
+    var dateRange = [];
+    for (var i = 0; i < 7; i++){
+      dateRange.push(
+        moment(startOfWeek).add(i, 'days').toJSON()
+      )
+    }
+    console.log(dateRange[0]);
     return (
             <div>
               <button onClick={this.handleClick}>Click me!</button>
-              <p>
-                {this.state.date.toJSON()}
-              </p>
               <Week
-                startOfWeek={this.props.startOfWeek}
-                dateRange={this.props.dateRange}
+                startOfWeek={startOfWeek}
+                dateRange={dateRange}
 
               />
             </div>

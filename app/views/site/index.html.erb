@@ -2,8 +2,4 @@
 
 <h1>Listing Appointments</h1>
 
-<% start_date = Date.today + 28.days %>
-<% date_range = (start_date.beginning_of_week..start_date.end_of_week).to_a %>
-
-
-<%= react_component 'Main', {startOfWeek: date_range.first, dateRange: date_range}  %>
+<%= react_component 'Main' %>
