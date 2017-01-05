@@ -21,6 +21,10 @@ body {
 
 }
 
+.button {
+  margin: 10px;
+}
+
 div.slot {
   height: 60px;
   overflow: auto;

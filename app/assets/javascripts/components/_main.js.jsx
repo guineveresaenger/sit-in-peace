@@ -40,9 +40,9 @@ var Main = React.createClass({
     console.log(dateRange[0]);
     return (
             <div>
-              <button onClick={this.displayNextWeek}>Next week!</button>
-              <button onClick={this.displayPreviousWeek}>Previous week!</button>
-              <button onClick={this.displayCurrentWeek}>Current week!</button>
+              <button className='button' onClick={this.displayNextWeek}>Next week!</button>
+              <button className='button' onClick={this.displayPreviousWeek}>Previous week!</button>
+              <button className='button' onClick={this.displayCurrentWeek}>Current week!</button>
 
               <Week
                 startOfWeek={this.props.startOfWeek}
