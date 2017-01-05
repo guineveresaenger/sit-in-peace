@@ -5,8 +5,6 @@ var Hour = React.createClass({
     this.props.thisWeekAppts.map((appt) =>{
       if(appt.start_time.substr(11,2) == this.props.hourName){
         thisHourAppts.push(appt);
-        console.log(appt);
-        console.log("hour: " + this.props.hourName);
       }
     });
     return thisHourAppts;

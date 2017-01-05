@@ -29,7 +29,8 @@ var Week = React.createClass({
     for (var i = 0; i < 24; i++){
       hours.push(
         <div className="hour" key={i}>
-          <Hour hourName={i}
+          <Hour
+            hourName={i}
             startOfWeek={this.props.startOfWeek}
             dateRange={this.props.dateRange}
             thisWeekAppts={this.filterByWeek()}

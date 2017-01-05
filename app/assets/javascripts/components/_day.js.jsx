@@ -4,7 +4,6 @@ var Day = React.createClass({
     this.props.thisHourAppts.map((appt) =>{
       if(appt.start_time.substr(0,10) == this.props.dayDate && appt.start_time.substr(11,2) == this.props.hourName) {
         thisSlotAppts.push(appt);
-        console.log("heyyy: " + appt.description);
       }
     });
     return thisSlotAppts;
@@ -26,7 +25,7 @@ var Day = React.createClass({
     if(slotAppts.length == 0){
       return (
         <div onClick={this.handleClick}>
-          
+
         </div>
       )
     } else {
