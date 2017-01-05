@@ -18,7 +18,7 @@ var Hour = React.createClass({
       days.push(
         <div className="slot column" key={day_names[i]}>
           <Day hourName={this.props.hourName}
-            dayDate={this.props.dateRange[i]}
+            dayDate={this.props.dateRange[i].substr(0,10)}
             thisHourAppts={this.filterByHour()}
              />
         </div>

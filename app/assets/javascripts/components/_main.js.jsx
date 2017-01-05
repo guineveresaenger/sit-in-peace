@@ -5,8 +5,28 @@ var Main = React.createClass({
     return {date: moment().toJSON()}
   },
 
-  handleClick(){
-    console.log("I've been clicked!");
+  displayNextWeek(){
+    console.log("Next week");
+    var newStartDate = moment(this.state.date).add(7, 'days').toJSON();
+    this.setState({
+      date: newStartDate
+    })
+  },
+
+  displayPreviousWeek(){
+    console.log("Previous week");
+    var newStartDate = moment(this.state.date).subtract(7, 'days').toJSON();
+    this.setState({
+      date: newStartDate
+    })
+  },
+
+  displayCurrentWeek(){
+    console.log("Current week");
+    var newStartDate = moment().toJSON();
+    this.setState({
+      date: newStartDate
+    })
   },
 
   render(){
@@ -20,9 +40,12 @@ var Main = React.createClass({
     console.log(dateRange[0]);
     return (
             <div>
-              <button onClick={this.handleClick}>Click me!</button>
+              <button onClick={this.displayNextWeek}>Next week!</button>
+              <button onClick={this.displayPreviousWeek}>Previous week!</button>
+              <button onClick={this.displayCurrentWeek}>Current week!</button>
+
               <Week
-                startOfWeek={startOfWeek}
+                startOfWeek={this.props.startOfWeek}
                 dateRange={dateRange}
 
               />

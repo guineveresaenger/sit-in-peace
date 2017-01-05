@@ -15,6 +15,7 @@ var Week = React.createClass({
       for(var i = 0; i < range.length; i++){
         if(appt.start_time.substr(0,10) == range[i].substr(0,10)){
           thisWeekAppts.push(appt);
+
         }
       }
     });
