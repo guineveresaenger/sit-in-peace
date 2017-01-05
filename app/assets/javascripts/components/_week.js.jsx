@@ -14,6 +14,17 @@ var Week = React.createClass({
     console.log("submitted this appointment: " + appointment);
   },
 
+  handleDelete(id) {
+    $.ajax({
+      url: `/api/v1/appointments/${id}`,
+      type: 'DELETE',
+      success(response) {
+        console.log("successfully removed item");
+      }
+    });
+
+  },
+
   filterByWeek() {
     var range = this.props.dateRange;
     // iterate over appts and see if they match the dates in our range
@@ -51,6 +62,7 @@ var Week = React.createClass({
         <div key={appt.id}>
           <h3>{appt.start_time}</h3>
           <p>{appt.description}</p>
+          <button onClick={this.handleDelete.bind(this, appt.id)}>Delete this appointment</button>
         </div>
       )
     });

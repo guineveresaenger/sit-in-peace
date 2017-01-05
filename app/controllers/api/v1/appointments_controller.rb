@@ -15,7 +15,7 @@ class Api::V1::AppointmentsController < Api::V1::BaseController
   end
 
   def destroy
-    respond_with Item.destroy(params["id"])
+    respond_with Appointment.destroy(params[:id])
   end
 
   private
