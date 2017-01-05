@@ -26,7 +26,7 @@ var Day = React.createClass({
     if(slotAppts.length == 0){
       return (
         <div onClick={this.handleClick}>
-          Blank
+          
         </div>
       )
     } else {

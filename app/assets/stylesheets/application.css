@@ -13,11 +13,20 @@
  *= require_tree .
  *= require_self
  */
+body {
+  background-color: lightgreen;
+}
 
- body {
-   background-color: #f7e7b4;
- }
+.column {
+
+}
 
 div.slot {
-  border: 2px solid black;
+  height: 60px;
+  overflow: auto;
+  border: 1px solid black;
+}
+
+div.day-header {
+  height: 80px;
 }

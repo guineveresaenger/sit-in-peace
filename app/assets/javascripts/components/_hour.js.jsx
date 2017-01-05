@@ -31,8 +31,8 @@ var Hour = React.createClass({
 
 
       <div className="row small-up-8">
-        <div className="column">
-        {this.props.hourName}
+        <div className="column slot">
+          {this.props.hourName}
         </div>
         {days}
       </div>

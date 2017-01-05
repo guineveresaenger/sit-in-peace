@@ -48,7 +48,7 @@ var Week = React.createClass({
     });
     return (
       <div>
-        <WeekdayLabels/>
+        <WeekdayLabels dateRange={this.props.dateRange}/>
         {hours}
         {appts}
       </div>
