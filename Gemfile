@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'react-rails'
 # Can set up controller to talk to JSON
 gem 'responders'
+# To assist with time handling
+gem 'momentjs-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
