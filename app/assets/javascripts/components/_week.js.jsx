@@ -73,6 +73,7 @@ var Week = React.createClass({
     });
     return (
       <div>
+        Add a new appointment:
         <NewAppointment handleSubmit={this.handleSubmit}/>
         <WeekdayLabels dateRange={this.props.dateRange}/>
         {hours}

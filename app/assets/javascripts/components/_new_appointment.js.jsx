@@ -8,9 +8,7 @@ var NewAppointment = React.createClass({
 
     // use Moment.js to format into a valid date
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
-    console.log("this is the day: " + date);
-    console.log("this is the hour: " + hour);
-    console.log("this is the formatted time " + completeTime);
+    
     $.ajax({
       url: '/api/v1/appointments',
       type: 'POST',
@@ -23,7 +21,6 @@ var NewAppointment = React.createClass({
   render() {
     return (
       <div>
-        Put the new item form here.
         <input type='date' ref='date' placeholder='Enter the day of the appointment' />
         <input ref='hour' placeholder='00:00' />
         <input ref='description' placeholder='Enter the description of the appointment' />

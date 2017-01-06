@@ -9,13 +9,16 @@ var Day = React.createClass({
     return thisSlotAppts;
   },
 
-  handleClick(){
-    console.log("clicked a div: " + this.props.dayDate + " at " + this.props.hourName);
+  displayDetails(id){
+    this.props.displayDetails(id)
   },
+  // handleEmptySlot(){
+  //   console.log("clicked a slot on " + this.props.dayDate + " at " + this.props.hourName);
+  // },
   render() {
     var slotAppts = this.filterByDay().map((appt) =>{
       return (
-        <div key={appt.id}>
+        <div key={appt.id} onClick={this.displayDetails.bind(this, appt.id)} >
           {appt.description}
         </div>
       )
@@ -31,7 +34,7 @@ var Day = React.createClass({
     } else {
 
       return (
-        <div onClick={this.handleClick}>
+        <div >
           {slotAppts}
         </div>
       )
