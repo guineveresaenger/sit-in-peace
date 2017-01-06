@@ -46,6 +46,13 @@ var Week = React.createClass({
     return thisWeekAppts;
   },
 
+  getDetails(id){
+    var thisAppointment = this.state.appointments.find((appointment) =>{
+      return appointment.id = id;
+    });
+    console.log('getting details for id: ' + thisAppointment.id);
+  },
+
   render() {
     // make 24 table rows!
     var hours = [];
@@ -57,6 +64,7 @@ var Week = React.createClass({
             startOfWeek={this.props.startOfWeek}
             dateRange={this.props.dateRange}
             thisWeekAppts={this.filterByWeek()}
+            displayDetails={this.getDetails}
           />
 
         </div>
@@ -71,6 +79,7 @@ var Week = React.createClass({
         </div>
       )
     });
+    
     return (
       <div>
         Add a new appointment:

@@ -15,7 +15,7 @@ var Hour = React.createClass({
   },
 
   displayDetails(id){
-    console.log("clicked appointment of id: " + id);
+    this.props.displayDetails(id)
   },
 
   render() {
