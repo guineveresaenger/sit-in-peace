@@ -37,6 +37,7 @@ var Day = React.createClass({
         <div >
           {slotAppts}
         </div>
+
       )
     }
   }
