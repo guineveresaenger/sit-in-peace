@@ -18,11 +18,18 @@ var Week = React.createClass({
     $.ajax({
       url: `/api/v1/appointments/${id}`,
       type: 'DELETE',
-      success(response) {
+      success:() => {
         console.log("successfully removed item");
+        this.removeAppointmentFromDatabase(id);
       }
     });
+  },
 
+  removeAppointmentFromDatabase(id) {
+    var allAppointments = this.state.appointments.filter((appointment) =>{
+      return appointment.id != id;
+    });
+    this.setState({appointments: allAppointments});
   },
 
   filterByWeek() {
@@ -38,8 +45,6 @@ var Week = React.createClass({
     });
     return thisWeekAppts;
   },
-
-
 
   render() {
     // make 24 table rows!
