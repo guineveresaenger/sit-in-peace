@@ -39,6 +39,7 @@ var Week = React.createClass({
       data: {appointment: appointment},
       success: () => {
         console.log("HOLY SHIT!!!!");
+        this.updateAppointmentList(appointment);
       }
     });
   },
@@ -47,6 +48,15 @@ var Week = React.createClass({
       return appointment.id != id;
     });
     this.setState({appointments: allAppointments});
+  },
+
+  updateAppointmentList(appointment) {
+    var updatedAppointments = this.state.appointments.filter((appt) => {
+      return appt.id != appointment.id
+    });
+
+    updatedAppointments.push(appointment);
+    this.setState({appointments: updatedAppointments})
   },
 
   filterByWeek() {
