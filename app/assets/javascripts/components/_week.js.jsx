@@ -15,22 +15,8 @@ var Week = React.createClass({
         sitters: sitters[0],
         showAddNew: false,
       })
-      console.log("inside setState: " + sitters + appointments);
     });
-    console.log("componentWillMount called");
-
   },
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props !== nextProps){
-  //
-  //   }
-  //   $.getJSON('/api/v1/sitters.json', (response) => {
-  //     this.setState({
-  //       sitters: response,
-  //     })
-  //   });
-  // },
 
   handleSubmit(appointment){
     var newState = this.state.appointments.concat(appointment);
@@ -151,6 +137,7 @@ var Week = React.createClass({
           <AppointmentDetails appointment={this.state.currentAppointment}
           handleEdit={this.handleEdit}
           handleDelete={this.handleDelete}
+          sitters={this.state.sitters}
             /> : null}
         <WeekdayLabels dateRange={this.props.dateRange}/>
         {hours}
