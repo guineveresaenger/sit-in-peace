@@ -1,6 +1,7 @@
 var Week = React.createClass({
   getInitialState() {
     return {appointments: [],
+      sitters: [],
       showDetails: false,
       currentAppointment: null,}
   },
@@ -12,6 +13,11 @@ var Week = React.createClass({
 
       })
     });
+    $.getJSON('/api/v1/sitters.json'), (response) => {
+      this.setState({
+        sitters: response,
+      })
+    }
   },
 
   handleSubmit(appointment){
@@ -72,17 +78,10 @@ var Week = React.createClass({
     return thisWeekAppts;
   },
 
-
-
   getDetails(id){
-
-    console.log('id that got passed in: ' + id);
-
     var thisAppointment = this.state.appointments.find((appointment) =>{
       return appointment.id == id;
     });
-
-    console.log('getting details for id: ' + thisAppointment.id);
     // return thisAppointment;
     this.setState({
       currentAppointment: thisAppointment,
