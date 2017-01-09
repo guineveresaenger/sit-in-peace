@@ -38,7 +38,6 @@ var Week = React.createClass({
       type: 'PUT',
       data: {appointment: appointment},
       success: () => {
-        console.log("HOLY SHIT!!!!");
         this.updateAppointmentList(appointment);
       }
     });
@@ -47,7 +46,7 @@ var Week = React.createClass({
     var allAppointments = this.state.appointments.filter((appointment) =>{
       return appointment.id != id;
     });
-    this.setState({appointments: allAppointments});
+    this.setState({appointments: allAppointments, showDetails: false});
   },
 
   updateAppointmentList(appointment) {
@@ -56,7 +55,7 @@ var Week = React.createClass({
     });
 
     updatedAppointments.push(appointment);
-    this.setState({appointments: updatedAppointments})
+    this.setState({appointments: updatedAppointments, showDetails: false})
   },
 
   filterByWeek() {
@@ -73,8 +72,12 @@ var Week = React.createClass({
     return thisWeekAppts;
   },
 
+
+
   getDetails(id){
+
     console.log('id that got passed in: ' + id);
+
     var thisAppointment = this.state.appointments.find((appointment) =>{
       return appointment.id == id;
     });
@@ -100,7 +103,7 @@ var Week = React.createClass({
   },
 
   render() {
-    console.log("HELLO " + this.state.currentAppointment);
+
     // make 24 table rows!
     var hours = [];
     for (var i = 0; i < 24; i++){
@@ -117,15 +120,7 @@ var Week = React.createClass({
         </div>
       );
     }
-    // var appts = this.filterByWeek().map((appt) => {
-    //   return (
-    //     <div key={appt.id}>
-    //       <h3>{appt.start_time}</h3>
-    //       <p>{appt.description}</p>
-    //       <button onClick={this.handleDelete.bind(this, appt.id)}>Delete this appointment</button>
-    //     </div>
-    //   )
-    // });
+
 
     return (
       <div>
@@ -135,10 +130,10 @@ var Week = React.createClass({
         {this.state.showDetails ?
           <AppointmentDetails appointment={this.state.currentAppointment}
           handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
             /> : null}
         <WeekdayLabels dateRange={this.props.dateRange}/>
         {hours}
-
 
       </div>
     )

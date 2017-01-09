@@ -11,11 +11,8 @@ var Hour = React.createClass({
   },
 
   handleClick(day) {
+    //this.props.createNewAppointment(day, this.props.hourName)
     console.log("clicked a div on day: "+ day  +" at " + this.props.hourName);
-  },
-
-  displayDetails(id){
-    this.props.displayDetails(id)
   },
 
   render() {
@@ -28,14 +25,13 @@ var Hour = React.createClass({
           <Day hourName={this.props.hourName}
             dayDate={this.props.dateRange[i].substr(0,10)}
             thisHourAppts={this.filterByHour()}
-            displayDetails={this.displayDetails}
+            displayDetails={this.props.displayDetails}
              />
         </div>
       );
     }
 
     return (
-
 
       <div className="row small-up-8">
         <div className="column slot">

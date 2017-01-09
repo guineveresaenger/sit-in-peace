@@ -8,7 +8,7 @@ var NewAppointment = React.createClass({
 
     // use Moment.js to format into a valid date
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
-    
+
     $.ajax({
       url: '/api/v1/appointments',
       type: 'POST',
@@ -24,7 +24,7 @@ var NewAppointment = React.createClass({
         <input type='date' ref='date' placeholder='Enter the day of the appointment' />
         <input ref='hour' placeholder='00:00' />
         <input ref='description' placeholder='Enter the description of the appointment' />
-        <button onClick={this.handleClick}>
+        <button onClick={this.handleClick} className="button">
           Submit
         </button>
       </div>

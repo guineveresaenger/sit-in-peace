@@ -12,9 +12,7 @@ var Day = React.createClass({
   displayDetails(id){
     this.props.displayDetails(id)
   },
-  // handleEmptySlot(){
-  //   console.log("clicked a slot on " + this.props.dayDate + " at " + this.props.hourName);
-  // },
+
   render() {
     var slotAppts = this.filterByDay().map((appt) =>{
       return (
