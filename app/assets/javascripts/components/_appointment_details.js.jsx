@@ -15,6 +15,7 @@ var AppointmentDetails = React.createClass({
       date: props.appointment.start_time.substr(0,10),
       hour: props.appointment.start_time.substr(11,5),
       description: props.appointment.description,
+      
     };
   },
 

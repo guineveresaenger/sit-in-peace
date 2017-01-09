@@ -13,11 +13,22 @@ var Day = React.createClass({
     this.props.displayDetails(id)
   },
 
+  findSitter(id) {
+    console.log(this.props.sitters);
+    console.log("and the id: " + id);
+    return this.props.sitters.find((sitter) => {
+      return sitter.id == id;
+    });
+
+  },
+
   render() {
+
     var slotAppts = this.filterByDay().map((appt) =>{
       return (
         <div key={appt.id} onClick={this.displayDetails.bind(this, appt.id)} >
           {appt.description}
+          {this.findSitter(appt.sitter_id).name}
         </div>
       )
 
@@ -34,6 +45,7 @@ var Day = React.createClass({
       return (
         <div >
           {slotAppts}
+
         </div>
 
       )

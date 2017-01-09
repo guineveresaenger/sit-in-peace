@@ -16,6 +16,7 @@ var Hour = React.createClass({
   },
 
   render() {
+    console.log("Did the sitters get passed down? " + this.props.sitters);
     // make 7 days
     var days = [];
     var day_names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -26,6 +27,7 @@ var Hour = React.createClass({
             dayDate={this.props.dateRange[i].substr(0,10)}
             thisHourAppts={this.filterByHour()}
             displayDetails={this.props.displayDetails}
+            sitters={this.props.sitters}
              />
         </div>
       );

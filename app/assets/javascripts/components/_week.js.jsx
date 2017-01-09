@@ -5,20 +5,32 @@ var Week = React.createClass({
       showDetails: false,
       currentAppointment: null,}
   },
-  componentDidMount() {
-    $.getJSON('/api/v1/appointments.json', (response) => {
-      this.setState({
-        appointments: response,
-        showAddNew: false,
+  componentWillMount() {
+    var appointments = $.getJSON('/api/v1/appointments.json');
+    var sitters = $.getJSON('/api/v1/sitters.json');
 
-      })
-    });
-    $.getJSON('/api/v1/sitters.json'), (response) => {
+    $.when( appointments, sitters ).done(( appointments, sitters ) => {
       this.setState({
-        sitters: response,
+        appointments: appointments[0],
+        sitters: sitters[0],
+        showAddNew: false,
       })
-    }
+      console.log("inside setState: " + sitters + appointments);
+    });
+    console.log("componentWillMount called");
+
   },
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props !== nextProps){
+  //
+  //   }
+  //   $.getJSON('/api/v1/sitters.json', (response) => {
+  //     this.setState({
+  //       sitters: response,
+  //     })
+  //   });
+  // },
 
   handleSubmit(appointment){
     var newState = this.state.appointments.concat(appointment);
@@ -79,7 +91,7 @@ var Week = React.createClass({
   },
 
   getDetails(id){
-    var thisAppointment = this.state.appointments.find((appointment) =>{
+    var thisAppointment = this.state.appointments.find((appointment) => {
       return appointment.id == id;
     });
     // return thisAppointment;
@@ -102,7 +114,7 @@ var Week = React.createClass({
   },
 
   render() {
-
+    console.log("Here are this weeks sitters: " + this.state.sitters);
     // make 24 table rows!
     var hours = [];
     for (var i = 0; i < 24; i++){
@@ -114,13 +126,22 @@ var Week = React.createClass({
             dateRange={this.props.dateRange}
             thisWeekAppts={this.filterByWeek()}
             displayDetails={this.getDetails}
+            sitters={this.state.sitters}
           />
 
         </div>
       );
     }
-
-
+    var sitters = [];
+    for(var i = 0; i < this.state.sitters.length; i++) {
+      sitters.push(
+        <div key={this.state.sitters[i].id}>
+          <SitterDetails
+            sitter={this.state.sitters[i]}
+          />
+        </div>
+      );
+    }
     return (
       <div>
 
@@ -133,7 +154,8 @@ var Week = React.createClass({
             /> : null}
         <WeekdayLabels dateRange={this.props.dateRange}/>
         {hours}
-
+        BOO
+        {sitters}
       </div>
     )
   }
