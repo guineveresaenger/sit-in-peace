@@ -1,5 +1,3 @@
-
-
 var Main = React.createClass({
   getInitialState() {
     return {date: moment().toJSON()}

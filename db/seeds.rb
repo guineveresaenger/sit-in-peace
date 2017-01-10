@@ -12,12 +12,12 @@ Appointment.create!([
   {
     description: "THIS WEEK!",
     start_time: DateTime.new(2017,1,9,8),
-    sitter_id: 1
+    sitter_id: 6
   },
   {
     description: "Watch Brendan",
     start_time: DateTime.new(2017,1,10,8),
-    sitter_id: 1
+    sitter_id: 6
   },
   {
     description: "NEXT WEEK!",
@@ -26,7 +26,7 @@ Appointment.create!([
   {
     description: "SHOULD BE LAST ONE",
     start_time: DateTime.new(2017,1,11,8),
-    sitter_id: 2
+    sitter_id: 7
   },
 
 ])

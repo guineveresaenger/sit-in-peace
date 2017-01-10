@@ -2,8 +2,13 @@
 
 <h1>Listing Appointments</h1>
 
-<% start_date = Date.today  %>
-<% date_range = (start_date.beginning_of_week..start_date.end_of_week).to_a %>
+<h2>Listing Sitters:</h2>
+
+<% @sitters.each do |sitter| %>
+<ul>
+  <li><%= sitter.name %></li>
+</ul>
+<% end %>
 
 
-<%= react_component 'Main', {startOfWeek: date_range.first, dateRange: date_range}  %>
+<%= react_component 'Main'  %>
