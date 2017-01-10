@@ -6,6 +6,8 @@ gem 'react-rails'
 gem 'responders'
 # To assist with time handling
 gem 'momentjs-rails'
+# The Twilio gem
+gem 'twilio-ruby'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
@@ -46,6 +48,8 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+  # For secrets!
+  gem 'dotenv-rails'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
