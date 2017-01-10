@@ -27,7 +27,7 @@ var AppointmentDetails = React.createClass({
       date: props.appointment.start_time.substr(0,10),
       hour: props.appointment.start_time.substr(11,5),
       description: props.appointment.description,
-      sitter: this.findSitterByID(props.appointment.sitter_id)
+      sitter_name: this.findSitterByID(props.appointment.sitter_id).name
 
     };
   },
@@ -37,7 +37,7 @@ var AppointmentDetails = React.createClass({
     var date = this.state.date;
     var hour = this.state.hour;
     var description = this.state.description;
-    var sitter = this.state.sitter;
+    var sitter_id = this.findSitterByName(this.state.sitter_name).id;
 
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
     //Keep the same id but update description and/or time
@@ -45,8 +45,7 @@ var AppointmentDetails = React.createClass({
       id: this.props.appointment.id,
       start_time: completeTime,
       description: description,
-      sitter: sitter,
-
+      sitter_id: sitter_id,
     };
     this.props.handleEdit(appointment);
 
@@ -73,7 +72,7 @@ var AppointmentDetails = React.createClass({
   },
   handleSitterChange(event) {
     this.setState({
-      sitter: this.findSitterByName(event.taget.value),
+      sitter_name: event.target.value,
     });
   },
 
@@ -81,16 +80,10 @@ var AppointmentDetails = React.createClass({
     return(
       <div>
         I am an appointment. You can edit me. Or delete me.
-        <input type='date' value={ this.state.date }
-               onChange={ this.handleDateChange }/>
-        <input value={ this.state.hour }
-                onChange={ (event) => this.handleHourChange }/>
-        <input value={ this.state.description }
-               onChange={ (event) => this.handleDescriptionChange }/>
-        <input value={this.state.sitter.name}
-              onChange={ (event) => this.handleSitterChange }/>
-
-
+        <input type='date' value={ this.state.date } onChange={ this.handleDateChange }/>
+        <input value={ this.state.hour } onChange={ this.handleHourChange }/>
+        <input value={ this.state.description } onChange={ this.handleDescriptionChange }/>
+        <input value={this.state.sitter_name} onChange={ this.handleSitterChange }/>
         <button className='button' onClick={ this.handleEdit }>
           Update
         </button>

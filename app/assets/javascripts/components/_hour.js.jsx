@@ -11,12 +11,11 @@ var Hour = React.createClass({
   },
 
   handleClick(day) {
-    //this.props.createNewAppointment(day, this.props.hourName)
+
     console.log("clicked a div on day: "+ day  +" at " + this.props.hourName);
   },
 
   render() {
-    console.log("Did the sitters get passed down? " + this.props.sitters);
     // make 7 days
     var days = [];
     var day_names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]

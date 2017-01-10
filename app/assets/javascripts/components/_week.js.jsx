@@ -57,7 +57,7 @@ var Week = React.createClass({
     var updatedAppointments = this.state.appointments.filter((appt) => {
       return appt.id != appointment.id
     });
-
+    
     updatedAppointments.push(appointment);
     this.setState({appointments: updatedAppointments, showDetails: false})
   },
@@ -100,7 +100,7 @@ var Week = React.createClass({
   },
 
   render() {
-    console.log("Here are this weeks sitters: " + this.state.sitters);
+
     // make 24 table rows!
     var hours = [];
     for (var i = 0; i < 24; i++){
