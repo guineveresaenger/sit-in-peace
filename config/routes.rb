@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  get 'messages/reply'
+  # get 'messages/reply'
+  resource :messages do
+    collection do
+      post 'reply'
+    end
+  end
+
+  post 'messages/initiate' => 'messages#initiate', as: 'messages_initiate'
 
   root to: "site#index"
   get '/sitters' => 'site#sitters'
