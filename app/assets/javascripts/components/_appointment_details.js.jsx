@@ -23,11 +23,13 @@ var AppointmentDetails = React.createClass({
   },
 
   stateFromProps(props){
+    var sitterName;
+    this.findSitterByID(props.appointment.sitter_id) ? sitterName = this.findSitterByID(props.appointment.sitter_id).name : sitterName = ''
     return {
       date: props.appointment.start_time.substr(0,10),
       hour: props.appointment.start_time.substr(11,5),
       description: props.appointment.description,
-      sitter_name: this.findSitterByID(props.appointment.sitter_id).name
+      sitter_name: sitterName,
 
     };
   },
@@ -37,7 +39,7 @@ var AppointmentDetails = React.createClass({
     var date = this.state.date;
     var hour = this.state.hour;
     var description = this.state.description;
-    var sitter_id = this.findSitterByName(this.state.sitter_name).id;
+    var sitter_id; this.findSitterByName(this.state.sitter_name) ? sitter_id = this.findSitterByName(this.state.sitter_name).id : null
 
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
     //Keep the same id but update description and/or time
@@ -71,19 +73,38 @@ var AppointmentDetails = React.createClass({
     });
   },
   handleSitterChange(event) {
+      console.log("sitterCHange called");
     this.setState({
+
       sitter_name: event.target.value,
     });
   },
 
   render() {
+    var sitterChoices = [];
+    for(var i = 0; i < this.props.sitters.length; i++){
+      sitterChoices.push(
+        <option value={this.props.sitters[i].name} key={this.props.sitters[i].id}>
+          {this.props.sitters[i].name}
+        </option>
+      )
+    }
     return(
       <div>
         I am an appointment. You can edit me. Or delete me.
         <input type='date' value={ this.state.date } onChange={ this.handleDateChange }/>
         <input value={ this.state.hour } onChange={ this.handleHourChange }/>
         <input value={ this.state.description } onChange={ this.handleDescriptionChange }/>
-        <input value={this.state.sitter_name} onChange={ this.handleSitterChange }/>
+
+        Pick a sitter:
+        <select value={this.state.sitter_name} onChange={this.handleSitterChange}>
+          <option value={''}> --No Sitter-- </option>
+          {sitterChoices}
+        </select>
+
+
+
+
         <button className='button' onClick={ this.handleEdit }>
           Update
         </button>
