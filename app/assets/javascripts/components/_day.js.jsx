@@ -14,8 +14,6 @@ var Day = React.createClass({
   },
 
   findSitter(id) {
-    console.log(this.props.sitters);
-    console.log("and the id: " + id);
     if( id === null) {
       return null;
     } else {

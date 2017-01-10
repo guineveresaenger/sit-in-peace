@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'messages/reply'
+
   root to: "site#index"
   get '/sitters' => 'site#sitters'
 
