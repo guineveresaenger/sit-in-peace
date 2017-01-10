@@ -57,7 +57,7 @@ var Week = React.createClass({
     var updatedAppointments = this.state.appointments.filter((appt) => {
       return appt.id != appointment.id
     });
-    
+
     updatedAppointments.push(appointment);
     this.setState({appointments: updatedAppointments, showDetails: false})
   },
@@ -132,7 +132,8 @@ var Week = React.createClass({
       <div>
 
         <button onClick={this.onButtonClick} className='button'>Add a new appointment</button>
-        {this.state.showAddNew ? <NewAppointment handleSubmit={this.handleSubmit}/> : null}
+        {this.state.showAddNew ? <NewAppointment handleSubmit={this.handleSubmit}
+        sitters={this.state.sitters}/> : null}
         {this.state.showDetails ?
           <AppointmentDetails appointment={this.state.currentAppointment}
           handleEdit={this.handleEdit}
