@@ -16,12 +16,13 @@ class MessagesController < ApplicationController
 
   def initiate
     boot_twilio
+    sitter_number = params['phone']
 
-
+    body = params['body']
     sms = @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
-      to: 2065187269,
-      body: 'Getting closer...',
+      to: sitter_number,
+      body: 'This is posted from Ajax.' + body,
     )
     redirect_to root_path
 

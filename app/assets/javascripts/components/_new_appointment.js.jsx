@@ -1,7 +1,7 @@
 var NewAppointment = React.createClass({
   getInitialState(){
     return {
-      potSitterIDs: [],
+      // potSitterIDs: [],
       showMessageSitters: false,
     }
   },
@@ -53,16 +53,27 @@ var NewAppointment = React.createClass({
     });
   },
 
-  sittersToMessage(sitter) {
-    console.log("sittersToMessage called in new_appointment");
-    var sittersSoFar = this.state.potSitterIDs;
-    if (this.state.potSitterIDs.indexOf(sitter.id) === -1) {
-      sittersSoFar.push(sitter.id)
-      this.setState({
-        potSitterIDs: sittersSoFar
-      })
-    }
-    console.log(this.state.potSitterIDs);
+  messageSitter(sitter) {
+    console.log("messageSitter called in new_appointment");
+    var body = this.refs.description.value;
+    var phone = sitter.phone
+    $.ajax({
+      url: '/messages/initiate',
+      type: 'POST',
+      data: {body: body, phone: phone},
+
+      success: (response) => {
+        console.log("yay message sent!");
+      }
+    })
+    // var sittersSoFar = this.state.potSitterIDs;
+    // if (this.state.potSitterIDs.indexOf(sitter.id) === -1) {
+    //   sittersSoFar.push(sitter.id)
+    //   this.setState({
+    //     potSitterIDs: sittersSoFar
+    //   })
+    // }
+    // console.log(this.state.potSitterIDs);
   },
 
   toggleMessageSitters() {
@@ -92,8 +103,8 @@ var NewAppointment = React.createClass({
         </select>
 
         <button onClick={this.toggleMessageSitters} className='button'>Select sitters to message</button>
-        {this.state.showMessageSitters ? <SelectSitters sitters= {this.props.sitters} sittersToMessage={this.sittersToMessage}/> : null}
-        <button onClick={this.handleClick} className="button">
+        {this.state.showMessageSitters ? <SelectSitters sitters= {this.props.sitters} messageSitter={this.messageSitter}/> : null}
+        <button onClick={this.handleClick} className="button alert">
           Submit
         </button>
       </div>
