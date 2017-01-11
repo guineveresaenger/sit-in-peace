@@ -1,7 +1,8 @@
 var NewAppointment = React.createClass({
   getInitialState(){
     return {
-      potSitters: []
+      potSitterIDs: [],
+      showMessageSitters: false,
     }
   },
 
@@ -26,15 +27,20 @@ var NewAppointment = React.createClass({
       sitter_id = null;
       covered = false;
     }
+    var pot_sitters = this.state.potSitters
 
     $.ajax({
       url: '/api/v1/appointments',
       type: 'POST',
-      data: {appointment: {
-        start_time: completeTime,
-        description: description,
-        sitter_id: sitter_id,
-        covered: covered}},
+      data: {appointment:
+        {
+          start_time: completeTime,
+          description: description,
+          sitter_id: sitter_id,
+          covered: covered,
+          pot_sitters: pot_sitters,
+        }
+      },
       success: (appointment) => {
         this.props.handleSubmit(appointment)
       }
@@ -49,15 +55,19 @@ var NewAppointment = React.createClass({
 
   sittersToMessage(sitter) {
     console.log("sittersToMessage called in new_appointment");
-    var sittersSoFar = this.state.potSitters;
-    // for (var i = 0; i < this.state.potSitters; i++) {
-    //   if this.state.potSitters[i].id ==
-    // }
-    sittersSoFar.push(sitter.id)
-    this.setState({
-      potSitters: sittersSoFar
-    })
-    console.log(this.state.potSitters);
+    var sittersSoFar = this.state.potSitterIDs;
+    if (this.state.potSitterIDs.indexOf(sitter.id) === -1) {
+      sittersSoFar.push(sitter.id)
+      this.setState({
+        potSitterIDs: sittersSoFar
+      })
+    }
+    console.log(this.state.potSitterIDs);
+  },
+
+  toggleMessageSitters() {
+    console.log("toggleMessageSitters clicked");
+    this.setState({showMessageSitters: !this.state.showMessageSitters})
   },
 
   render() {
@@ -81,9 +91,8 @@ var NewAppointment = React.createClass({
           {sitterChoices}
         </select>
 
-        Select sitters to message:
-        <SelectSitters sitters= {this.props.sitters} sittersToMessage={this.sittersToMessage}/>
-
+        <button onClick={this.toggleMessageSitters} className='button'>Select sitters to message</button>
+        {this.state.showMessageSitters ? <SelectSitters sitters= {this.props.sitters} sittersToMessage={this.sittersToMessage}/> : null}
         <button onClick={this.handleClick} className="button">
           Submit
         </button>
