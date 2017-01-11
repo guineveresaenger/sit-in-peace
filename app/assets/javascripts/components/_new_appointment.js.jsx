@@ -1,12 +1,12 @@
 var NewAppointment = React.createClass({
   getInitialState(){
     return {
-      // potSitterIDs: [],
+      potSitterIDs: [],
       showMessageSitters: false,
     }
   },
 
-  handleClick(){
+  handleSubmit(){
     var date = this.refs.date.value;
     var hour = this.refs.hour.value;
     var description = this.refs.description.value;
@@ -27,8 +27,7 @@ var NewAppointment = React.createClass({
       sitter_id = null;
       covered = false;
     }
-    var pot_sitters = this.state.potSitters
-
+    // post to database
     $.ajax({
       url: '/api/v1/appointments',
       type: 'POST',
@@ -38,13 +37,18 @@ var NewAppointment = React.createClass({
           description: description,
           sitter_id: sitter_id,
           covered: covered,
-          pot_sitters: pot_sitters,
         }
       },
       success: (appointment) => {
         this.props.handleSubmit(appointment)
+
       }
     })
+    // now message sitters - each one in our saved list
+    console.log(this.state.potSitterIDs);
+    for(var i = 0; i < this.state.potSitterIDs.length; i++){
+      this.props.messageSitter(this.state.potSitterIDs[i], description, date, hour)
+    }
   },
 
   findSitterByName(name) {
@@ -53,31 +57,19 @@ var NewAppointment = React.createClass({
     });
   },
 
-  messageSitter(sitter) {
-    console.log("messageSitter called in new_appointment");
-    var body = this.refs.description.value;
-    var phone = sitter.phone
-    $.ajax({
-      url: '/messages/initiate',
-      type: 'POST',
-      data: {body: body, phone: phone},
-
-      success: (response) => {
-        console.log("yay message sent!");
-      }
-    })
-    // var sittersSoFar = this.state.potSitterIDs;
-    // if (this.state.potSitterIDs.indexOf(sitter.id) === -1) {
-    //   sittersSoFar.push(sitter.id)
-    //   this.setState({
-    //     potSitterIDs: sittersSoFar
-    //   })
-    // }
-    // console.log(this.state.potSitterIDs);
+  sittersToMessage(sitter) {
+    // this will add sitter id's to a list stored in state, so we can message all selected upon submit.
+    var sittersSoFar = this.state.potSitterIDs;
+    if (this.state.potSitterIDs.indexOf(sitter.id) === -1) {
+      sittersSoFar.push(sitter.id)
+      this.setState({
+        potSitterIDs: sittersSoFar
+      })
+    }
   },
 
   toggleMessageSitters() {
-    console.log("toggleMessageSitters clicked");
+    console.log("toggleMessageSitters called");
     this.setState({showMessageSitters: !this.state.showMessageSitters})
   },
 
@@ -103,8 +95,8 @@ var NewAppointment = React.createClass({
         </select>
 
         <button onClick={this.toggleMessageSitters} className='button'>Select sitters to message</button>
-        {this.state.showMessageSitters ? <SelectSitters sitters= {this.props.sitters} messageSitter={this.messageSitter}/> : null}
-        <button onClick={this.handleClick} className="button alert">
+        {this.state.showMessageSitters ? <SelectSitters sitters= {this.props.sitters} messageSitter={this.sittersToMessage}/> : null}
+        <button onClick={this.handleSubmit} className="button alert">
           Submit
         </button>
       </div>

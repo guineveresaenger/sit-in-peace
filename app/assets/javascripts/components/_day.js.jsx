@@ -24,7 +24,6 @@ var Day = React.createClass({
   },
 
   render() {
-
     var slotAppts = this.filterByDay().map((appt) =>{
       var sitterName;
       this.findSitter(appt.sitter_id) ? sitterName = this.findSitter(appt.sitter_id).name : sitterName = ''
@@ -38,23 +37,8 @@ var Day = React.createClass({
 
     });
 
-
-
-    if(slotAppts.length == 0){
-      return (
-        <div>
-
-        </div>
-      )
-    } else {
-
-      return (
-        <div >
-          {slotAppts}
-
-        </div>
-
-      )
-    }
+    return (
+      (slotAppts.length == 0) ? null : <div>{slotAppts}</div>
+    )
   }
 });

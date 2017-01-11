@@ -99,6 +99,32 @@ var Week = React.createClass({
     }
   },
 
+  messageSitter(id, description, date, hour){
+    console.log("This, however, does not seem to work.");
+    console.log("this is the id:" + id);
+    console.log(description);
+    console.log(date);
+    console.log(hour);
+    var phone = this.findSitterByID(id).phone;
+    var body = description;
+    $.ajax({
+      url: '/messages/initiate',
+      type: 'POST',
+      data: {body: body, phone: phone},
+
+      success: (response) => {
+        console.log("yay message sent!");
+      }
+    })
+
+  },
+
+  findSitterByID(id) {
+    return this.state.sitters.find((sitter) => {
+      return sitter.id == id;
+    });
+  },
+
   render() {
 
     // make 24 table rows!
@@ -133,7 +159,8 @@ var Week = React.createClass({
 
         <button onClick={this.onButtonClick} className='button'>Add a new appointment</button>
         {this.state.showAddNew ? <NewAppointment handleSubmit={this.handleSubmit}
-        sitters={this.state.sitters}/> : null}
+        sitters={this.state.sitters}
+        messageSitter={this.messageSitter}/> : null}
         {this.state.showDetails ?
           <AppointmentDetails appointment={this.state.currentAppointment}
           handleEdit={this.handleEdit}
