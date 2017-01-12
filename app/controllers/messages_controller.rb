@@ -5,12 +5,24 @@ class MessagesController < ApplicationController
   def reply
     message_body = params["Body"]
     from_number = params["From"]
+    # find sitter with that phone number
+    sitter = Sitter.find_by(phone: from_number[2..11])
+
+    # send the reply
     boot_twilio
     sms = @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
       to: from_number,
-      body: "Hi! We're sorry, #{from_number}, but this number cannot reach an actual human."
+      body: "Thank you so much for helping me out, #{sitter.name}."
     )
+
+    # update the appointment...!
+    appointment = Appointment.find(message_body.to_i)
+    appointment.update_attribute(:sitter_id, 9)
+
+    puts message_body.to_i
+    puts sitter.name
+
 
   end
 
@@ -21,7 +33,7 @@ class MessagesController < ApplicationController
     body = params['body']
     sms = @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
-      to: 6086180352,
+      to: sitter_number,
       body: 'This is posted from Ajax.' + body,
     )
     redirect_to root_path
