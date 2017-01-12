@@ -3,31 +3,21 @@ var NewAppointment = React.createClass({
     return {
       potSitterIDs: [],
       showMessageSitters: false,
-      // fieldsComplete: false,
     }
   },
 
   handleSubmit(){
 
-    // if(!this.state.fieldsComplete){
-    //   this.handleIncompleteFields();
-    //   console.log("are the fields complete? " +this.state.fieldsComplete);
-    //   if(!this.state.fieldsComplete){
-    //     return;
-    //   }
-    // }
-
-
     var date = this.refs.date.value;
     var hour = this.refs.hour.value;
     var description = this.refs.description.value;
 
-    if(!this.fieldsComplete()){
-      return;
-    }
+    // TODO: uncomment the next 3 lines!
+    // if(!this.fieldsComplete()){
+    //   return;
+    // }
 
     // TODO: customize input form so it allows only correctly formatted date
-    // TODO: validate inputs in general
 
     // use Moment.js to format into a valid date
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();

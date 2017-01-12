@@ -9,9 +9,7 @@ var SelectSitters = React.createClass({
     for(var i = 0; i < this.props.sitters.length; i++){
       sitterChoices.push(
         <div key={this.props.sitters[i].id}>
-          <button className="button" onClick={this.selectSitter.bind(this, this.props.sitters[i])}>
-            {this.props.sitters[i].name}
-          </button>
+          <SitterButton sitter={this.props.sitters[i]} clickButton={this.selectSitter}/>
         </div>
       )
 
