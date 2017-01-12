@@ -14,16 +14,17 @@ var NewAppointment = React.createClass({
     var description = this.refs.description.value;
 
     // TODO: uncomment the next 3 lines!
-    // if(!this.fieldsComplete()){
-    //   return;
-    // }
+    if(!this.fieldsComplete()){
+      return;
+    }
 
     // TODO: customize input form so it allows only correctly formatted date
 
     // use Moment.js to format into a valid date
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
 
-    var sitterName = this.refs.sitterName.value;
+    var sitterName = this.setSitterName();
+    
     var sitter_id;
     var covered;
     if(sitterName !== '') {
@@ -54,6 +55,15 @@ var NewAppointment = React.createClass({
     for(var i = 0; i < this.state.potSitterIDs.length; i++){
       this.props.messageSitter(this.state.potSitterIDs[i], description, date, hour)
     }
+  },
+
+  setSitterName() {
+    if (this.refs.sitterName === undefined){
+      return '';
+    } else {
+      return this.refs.sitterName.value
+    }
+
   },
 
   findSitterByName(name) {

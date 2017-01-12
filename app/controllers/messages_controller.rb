@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
     body = params['body']
     sms = @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
-      to: sitter_number,
+      to: 6086180352,
       body: 'This is posted from Ajax.' + body,
     )
     redirect_to root_path
