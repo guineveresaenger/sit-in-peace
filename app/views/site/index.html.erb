@@ -1,21 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Appointments</h1>
-
-<h2>Listing Sitters:</h2>
-
-<% @sitters.each do |sitter| %>
-<ul>
-  <li><%= sitter.name %></li>
-</ul>
-<% end %>
-
-<p>
-  <%#form_tag(messages_initiate_path, :method => "post", id: "search-form", class: "left-space-needed", id: "search-box") do %>
-  <%# text_field_tag :search, "" %>
-      <%# submit_tag "Search", :name => "nil", class: "button" %>
-  <%# end %>
-</p>
-
 
 <%= react_component 'Main'  %>

@@ -4,7 +4,6 @@ var Main = React.createClass({
   },
 
   displayNextWeek(){
-    console.log("Next week");
     var newStartDate = moment(this.state.date).add(7, 'days').toJSON();
     this.setState({
       date: newStartDate
@@ -12,7 +11,6 @@ var Main = React.createClass({
   },
 
   displayPreviousWeek(){
-    console.log("Previous week");
     var newStartDate = moment(this.state.date).subtract(7, 'days').toJSON();
     this.setState({
       date: newStartDate
@@ -20,7 +18,6 @@ var Main = React.createClass({
   },
 
   displayCurrentWeek(){
-    console.log("Current week");
     var newStartDate = moment().toJSON();
     this.setState({
       date: newStartDate
@@ -35,7 +32,6 @@ var Main = React.createClass({
         moment(startOfWeek).add(i, 'days').toJSON()
       )
     }
-    console.log(dateRange[0]);
     return (
             <div>
               <button className='button' onClick={this.displayNextWeek}>Next week!</button>

@@ -3,13 +3,28 @@ var NewAppointment = React.createClass({
     return {
       potSitterIDs: [],
       showMessageSitters: false,
+      // fieldsComplete: false,
     }
   },
 
   handleSubmit(){
+
+    // if(!this.state.fieldsComplete){
+    //   this.handleIncompleteFields();
+    //   console.log("are the fields complete? " +this.state.fieldsComplete);
+    //   if(!this.state.fieldsComplete){
+    //     return;
+    //   }
+    // }
+
+
     var date = this.refs.date.value;
     var hour = this.refs.hour.value;
     var description = this.refs.description.value;
+
+    if(!this.fieldsComplete()){
+      return;
+    }
 
     // TODO: customize input form so it allows only correctly formatted date
     // TODO: validate inputs in general
@@ -45,7 +60,6 @@ var NewAppointment = React.createClass({
       }
     })
     // now message sitters - each one in our saved list
-    console.log(this.state.potSitterIDs);
     for(var i = 0; i < this.state.potSitterIDs.length; i++){
       this.props.messageSitter(this.state.potSitterIDs[i], description, date, hour)
     }
@@ -73,7 +87,33 @@ var NewAppointment = React.createClass({
     this.setState({showMessageSitters: !this.state.showMessageSitters})
   },
 
+  fieldsComplete() {
+    if(this.refs.date.value === '') {
+      alert('needs date');
+    }
+    if(this.refs.hour.value === '') {
+      alert('needs hour');
+    }
+    if(this.refs.description.value === '') {
+      alert('needs description');
+    }
+    if((this.refs.date.value !== '')&&(this.refs.hour.value !== '')&&(this.refs.description.value !== '')){
+      return true;
+    }
+    return false;
+  },
+
+
+  // setFieldsComplete() {
+  //     if((this.refs.date.value !== '')&&(this.refs.hour.value === '')&&(this.refs.description.value === '')){
+  //       this.setState({
+  //         fieldsComplete: true
+  //       })
+  //     }
+  // },
+
   render() {
+    // console.log(this.fieldsComplete());
     var sitterChoices = [];
     for(var i = 0; i < this.props.sitters.length; i++){
       sitterChoices.push(
@@ -94,7 +134,7 @@ var NewAppointment = React.createClass({
           {sitterChoices}
         </select>
 
-        <button onClick={this.toggleMessageSitters} className='button'>Select sitters to message</button>
+        {!this.state.showMessageSitters ? <button onClick={this.toggleMessageSitters} className='button'>Select sitters to message</button> : null}
         {this.state.showMessageSitters ? <SelectSitters sitters= {this.props.sitters} messageSitter={this.sittersToMessage}/> : null}
         <button onClick={this.handleSubmit} className="button alert">
           Submit

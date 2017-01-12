@@ -21,7 +21,7 @@ var Week = React.createClass({
   handleSubmit(appointment){
     var newState = this.state.appointments.concat(appointment);
     this.setState({ appointments: newState, showAddNew: false });
-    console.log("submitted this appointment: " + appointment);
+    console.log("appointment submitted!");
   },
 
   handleDelete(id) {
@@ -100,23 +100,17 @@ var Week = React.createClass({
   },
 
   messageSitter(id, description, date, hour){
-    console.log("This, however, does not seem to work.");
-    console.log("this is the id:" + id);
-    console.log(description);
-    console.log(date);
-    console.log(hour);
-    var phone = this.findSitterByID(id).phone;
-    var body = description;
-    $.ajax({
-      url: '/messages/initiate',
-      type: 'POST',
-      data: {body: body, phone: phone},
-
-      success: (response) => {
-        console.log("yay message sent!");
-      }
-    })
-
+    // var phone = this.findSitterByID(id).phone;
+    // $.ajax({
+    //   url: '/messages/initiate',
+    //   type: 'POST',
+    //   data: {body: description, phone: phone},
+    //
+    //   success: (response) => {
+    //     console.log("yay message sent!");
+    //   }
+    // })
+    console.log("phone message sent");
   },
 
   findSitterByID(id) {
