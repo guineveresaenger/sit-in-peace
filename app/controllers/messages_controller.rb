@@ -18,11 +18,8 @@ class MessagesController < ApplicationController
 
     # find appointment by reply message.
     appointment = Appointment.find(message_body.to_i)
+    # TODO: only update if sitter_id is null!!! otherwise, send back a different sms!
     appointment.update_attribute(:sitter_id, sitter.id)
-
-    puts message_body.to_i
-    puts sitter.name
-
 
   end
 
@@ -30,11 +27,11 @@ class MessagesController < ApplicationController
     boot_twilio
     sitter_number = params['phone']
 
-    body = "Hello, this is Guinevere. I was hoping you might be available for watching Brendan? Details below. #{params['date']} @ #{params['hour']}: #{params['description']}. If you can do this, please reply with the following number: #{params['appt_id']} " 
+    body = "Hello, this is Guinevere. I was hoping you might be available for watching Brendan? Details below. #{params['date']} @ #{params['hour']}: #{params['description']}. If you can do this, please reply with the following number: #{params['appt_id']} "
     sms = @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
-      to: sitter_number,
-      body: body,
+      to: 2065187269,
+      body: "test",
     )
     sms = @client
     redirect_to root_path

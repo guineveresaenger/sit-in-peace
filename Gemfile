@@ -10,6 +10,9 @@ gem 'momentjs-rails'
 gem 'twilio-ruby'
 # Try Figaro for secrets configuration...?
 gem 'figaro'
+# Use Whenever to schedule Cron tasks
+gem 'whenever', :require => false
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
 # Use sqlite3 as the database for Active Record
