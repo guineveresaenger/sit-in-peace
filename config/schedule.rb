@@ -21,6 +21,5 @@
 #TODO: send a task at a given time. Re-write below to be set at 24 hours before appointment, and then update the crontab using 'whenever --update-crontab'
 
 # every 1.minute do # 1.minute 1.day 1.week 1.month 1.year is also supported
-#   command "curl --data 'foo=bar' http://localhost:3000/messages/initiate
-# "
+#   command "curl --data 'foo=bar' http://localhost:3000/messages/initiate"
 # end
