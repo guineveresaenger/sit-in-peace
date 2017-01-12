@@ -15,11 +15,14 @@ var SitterButton = React.createClass({
 
     return(
       <div>
-        {this.state.buttonClicked ? <button className="button secondary">
-          {this.props.sitter.name} has been notified.
-      </button>: <button className="button" onClick={this.handleClick.bind(this, this.props.sitter)}>
-          {this.props.sitter.name}
-        </button>}
+        {this.state.buttonClicked ?
+          <button className="button secondary">
+            {this.props.sitter.name} has been notified.
+          </button> :
+          <button className="button" onClick={this.handleClick.bind(this, this.props.sitter)}>
+            {this.props.sitter.name}
+          </button>
+        }
       </div>
     )
   }

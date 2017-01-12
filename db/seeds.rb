@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Appointment.destroy_all
+Sitter.destroy_all
 
 Appointment.create!([
   {

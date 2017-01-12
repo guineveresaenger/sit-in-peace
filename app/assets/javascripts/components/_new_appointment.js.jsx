@@ -3,6 +3,7 @@ var NewAppointment = React.createClass({
     return {
       potSitterIDs: [],
       showMessageSitters: false,
+      showDropDown: false,
     }
   },
 
@@ -74,7 +75,20 @@ var NewAppointment = React.createClass({
 
   toggleMessageSitters() {
     console.log("toggleMessageSitters called");
-    this.setState({showMessageSitters: !this.state.showMessageSitters})
+    this.setState({
+      showMessageSitters: !this.state.showMessageSitters,
+      showDropDown: false,
+    })
+
+  },
+
+  toggleShowDropDown(){
+    console.log("toggleShowDropDown called");
+    this.setState({
+      showDropDown: !this.state.showDropDown,
+      showMessageSitters: false,
+    })
+
   },
 
   fieldsComplete() {
@@ -93,17 +107,7 @@ var NewAppointment = React.createClass({
     return false;
   },
 
-
-  // setFieldsComplete() {
-  //     if((this.refs.date.value !== '')&&(this.refs.hour.value === '')&&(this.refs.description.value === '')){
-  //       this.setState({
-  //         fieldsComplete: true
-  //       })
-  //     }
-  // },
-
   render() {
-    // console.log(this.fieldsComplete());
     var sitterChoices = [];
     for(var i = 0; i < this.props.sitters.length; i++){
       sitterChoices.push(
@@ -118,14 +122,26 @@ var NewAppointment = React.createClass({
         <input ref='hour' placeholder='00:00' />
         <input ref='description' placeholder='Enter the description of the appointment' />
 
-        Assign a sitter:
-        <select ref="sitterName">
-          <option value={''}> --No Sitter-- </option>
-          {sitterChoices}
-        </select>
+        <button onClick={this.toggleShowDropDown} className='button'>
+          Assign a sitter manually
+        </button>
 
-        {!this.state.showMessageSitters ? <button onClick={this.toggleMessageSitters} className='button'>Select sitters to message</button> : null}
-        {this.state.showMessageSitters ? <SelectSitters sitters= {this.props.sitters} messageSitter={this.sittersToMessage}/> : null}
+
+        { this.state.showDropDown ?
+          <select ref="sitterName">
+            <option value={''}> --No Sitter-- </option>
+            {sitterChoices}
+          </select> : null
+        }
+
+
+        <button onClick={this.toggleMessageSitters} className='button'>
+          Select sitters to message
+        </button>
+
+        {this.state.showMessageSitters ?
+          <SelectSitters sitters= {this.props.sitters} messageSitter={this.sittersToMessage}/> : null
+        }
         <button onClick={this.handleSubmit} className="button alert">
           Submit
         </button>
