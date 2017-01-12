@@ -16,9 +16,9 @@ class MessagesController < ApplicationController
       body: "Thank you so much for helping me out, #{sitter.name}."
     )
 
-    # update the appointment...!
+    # find appointment by reply message.
     appointment = Appointment.find(message_body.to_i)
-    appointment.update_attribute(:sitter_id, 9)
+    appointment.update_attribute(:sitter_id, sitter.id)
 
     puts message_body.to_i
     puts sitter.name
@@ -30,12 +30,13 @@ class MessagesController < ApplicationController
     boot_twilio
     sitter_number = params['phone']
 
-    body = params['body']
+    body = "Hello, this is Guinevere. I was hoping you might be available for watching Brendan? Details below. #{params['date']} @ #{params['hour']}: #{params['description']}. If you can do this, please reply with the following number: #{params['appt_id']} " 
     sms = @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
       to: sitter_number,
-      body: 'This is posted from Ajax.' + body,
+      body: body,
     )
+    sms = @client
     redirect_to root_path
 
   end

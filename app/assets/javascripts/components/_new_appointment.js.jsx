@@ -24,7 +24,7 @@ var NewAppointment = React.createClass({
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
 
     var sitterName = this.setSitterName();
-    
+
     var sitter_id;
     var covered;
     if(sitterName !== '') {

@@ -100,17 +100,22 @@ var Week = React.createClass({
   },
 
   messageSitter(id, description, date, hour){
-    // var phone = this.findSitterByID(id).phone;
-    // $.ajax({
-    //   url: '/messages/initiate',
-    //   type: 'POST',
-    //   data: {body: description, phone: phone},
-    //
-    //   success: (response) => {
-    //     console.log("yay message sent!");
-    //   }
-    // })
-    console.log("phone message sent");
+    var phone = this.findSitterByID(id).phone;
+    $.ajax({
+      url: '/messages/initiate',
+      type: 'POST',
+      data: {description: description,
+        phone: phone,
+        hour: hour,
+        date: date,
+        appt_id: 666,
+      },
+
+      success: (response) => {
+        console.log("yay message sent!");
+      }
+    })
+    // console.log("phone message sent");
   },
 
   findSitterByID(id) {
