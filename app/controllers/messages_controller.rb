@@ -3,24 +3,31 @@ class MessagesController < ApplicationController
  #skip_before_filter :authenticate_user!, :only => "reply"
 
   def reply
+    boot_twilio
     message_body = params["Body"]
     from_number = params["From"]
     # find sitter with that phone number
     sitter = Sitter.find_by(phone: from_number[2..11])
-
-    # send the reply
-    boot_twilio
-    @client.account.messages.create(
-      from: ENV["TWILIO_NUMBER"],
-      to: from_number,
-      body: "Thank you so much for helping me out, #{sitter.name}."
-    )
-
     # find appointment by reply message.
     appointment = Appointment.find(message_body.to_i)
-    # TODO: only update if sitter_id is null!!! otherwise, send back a different sms!
-    appointment.update_attribute(:sitter_id, sitter.id)
 
+    #if there is already sitter_id, tell sitter appointment is covered, and don't update sitter id.
+    if appointment.sitter_id
+      # find actual sitter
+      covering_sitter = Sitter.find(appointment.sitter_id)
+      @client.account.messages.create(
+        from: ENV["TWILIO_NUMBER"],
+        to: from_number,
+        body: "Thank you so much for offering, #{sitter.name}! However, #{covering_sitter.name} is already helping me on this one."
+      )
+    else # send confirmation and update sitter_id
+      @client.account.messages.create(
+        from: ENV["TWILIO_NUMBER"],
+        to: from_number,
+        body: "Thank you so much for helping me out, #{sitter.name}. You're on the schedule. I'll send you a reminder the day before."
+      )
+      appointment.update_attribute(:sitter_id, sitter.id)
+    end
   end
 
   def initiate
