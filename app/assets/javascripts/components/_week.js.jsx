@@ -99,20 +99,17 @@ var Week = React.createClass({
     }
   },
 
-  messageSitter(id, description, date, hour, appointment_id){
-    var phone = this.findSitterByID(id).phone;
-    // var prevAppointmentId = this.state.appointments[this.state.appointments.length -1].id;
-    // console.log(prevAppointmentId);
-
+  messageSitter(sitter_id, appointment){
+    var phone = this.findSitterByID(sitter_id).phone;
 
     $.ajax({
       url: '/messages/initiate',
       type: 'POST',
-      data: {description: description,
+      data: {
+        description: appointment.description,
         phone: phone,
-        hour: hour,
-        date: date,
-        appt_id: appointment_id,
+        start_time: appointment.start_time,
+        appointment_id: appointment.id,
       },
 
       success: (response) => {

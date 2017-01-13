@@ -26,8 +26,8 @@ class MessagesController < ApplicationController
   def initiate
     boot_twilio
     sitter_number = params['phone']
-
-    body = "Hello, this is Guinevere. I was hoping you might be available for watching Brendan? Details below. #{params['date']} @ #{params['hour']}: #{params['description']}. If you can do this, please reply with the following number: #{params['appt_id']} "
+    date = DateTime.parse(params['start_time'])
+    body = "Hello, this is Guinevere. I was hoping you might be available for watching Brendan? Details below. #{date.strftime("%B %-d at %l%P")}: #{params['description']}. If you can do this, please reply with the following number: #{params['appointment_id']} "
     @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
       to: sitter_number,
