@@ -47,7 +47,7 @@ class MessagesController < ApplicationController
       if ((appointment.start_time - 1.day) < Time.now) && (appointment.covered == true) && (reminder_sent == false)
         # find sitter
         sitter = Sitter.find(appointment.sitter_id)
-        body = "Hello, this is Guinevere, sending you a reminder about babysitting Brendan tomorrow. Details: #{appointment.start_time.strftime("%B %-d at %l %P")}: #{appointment.description}. Thanks again and see you soon!"
+        body = "Hello, this is Guinevere, sending you a reminder about babysitting Brendan tomorrow. Details: #{appointment.start_time.strftime("%B %-d at %l%P")}: #{appointment.description}. Thanks again and see you soon!"
         @client.account.messages.create(
           from: ENV["TWILIO_NUMBER"],
           to: sitter.phone,
