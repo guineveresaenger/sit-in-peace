@@ -4,10 +4,11 @@ Rails.application.routes.draw do
     collection do
       post 'reply'
       post 'remind'
+      post 'initiate'
     end
   end
 
-  post 'messages/initiate' => 'messages#initiate', as: 'messages_initiate'
+  #post 'messages/initiate' => 'messages#initiate', as: 'messages_initiate'
 
   root to: "site#index"
   get '/sitters' => 'site#sitters'

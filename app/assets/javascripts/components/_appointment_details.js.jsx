@@ -41,12 +41,7 @@ var AppointmentDetails = React.createClass({
     var description = this.state.description;
     var sitter_id;
     this.findSitterByName(this.state.sitter_name) ? sitter_id = this.findSitterByName(this.state.sitter_name).id : sitter_id = null
-    var covered;
-    if(sitter_id === null){
-      covered = false;
-    } else {
-      covered = true;
-    }
+
 
 
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
@@ -56,7 +51,7 @@ var AppointmentDetails = React.createClass({
       start_time: completeTime,
       description: description,
       sitter_id: sitter_id,
-      covered: covered,
+    
     };
     console.log(appointment);
     this.props.handleEdit(appointment);

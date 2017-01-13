@@ -21,6 +21,6 @@ class Api::V1::AppointmentsController < Api::V1::BaseController
   private
 
     def appointment_params
-      params.require(:appointment).permit(:id, :description, :start_time, :end_time, :sitter_id, :covered)
+      params.require(:appointment).permit(:id, :description, :start_time, :end_time, :sitter_id, :reminder_sent)
     end
 end

@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113195450) do
+ActiveRecord::Schema.define(version: 20170113203346) do
 
   create_table "appointments", force: :cascade do |t|
     t.string   "description"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.boolean  "covered",       default: false
     t.integer  "parent_id"
     t.integer  "sitter_id"
     t.datetime "created_at",                    null: false

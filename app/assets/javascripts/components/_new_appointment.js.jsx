@@ -25,14 +25,13 @@ var NewAppointment = React.createClass({
 
     var sitterName = this.setSitterName();
 
+    // TODO: make the following lines more concise somehow?
     var sitter_id;
-    var covered;
     if(sitterName !== '') {
       sitter_id = this.findSitterByName(sitterName).id;
-      covered = true;
     } else {
       sitter_id = null;
-      covered = false;
+
     }
     // post to database
     $.ajax({
@@ -43,7 +42,7 @@ var NewAppointment = React.createClass({
           start_time: completeTime,
           description: description,
           sitter_id: sitter_id,
-          covered: covered,
+
         }
       },
       success: (appointment) => {
