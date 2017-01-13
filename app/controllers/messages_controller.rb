@@ -30,14 +30,33 @@ class MessagesController < ApplicationController
     body = "Hello, this is Guinevere. I was hoping you might be available for watching Brendan? Details below. #{params['date']} @ #{params['hour']}: #{params['description']}. If you can do this, please reply with the following number: #{params['appt_id']} "
     sms = @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
-      to: 2065187269,
-      body: "test",
+      to: sitter_number,
+      body: body,
     )
     sms = @client
     redirect_to root_path
 
   end
 
+  def remind
+    boot_twilio
+
+
+    appointments = Appointment.all
+    appointments.each do |appointment|
+      if ((appointment.start_time - 1.day) < Time.now) && (appointment.covered == true) && (reminder_sent == false)
+        # find sitter
+        sitter = Sitter.find(appointment.sitter_id)
+        body = "Hello, this is Guinevere, sending you a reminder about babysitting Brendan tomorrow. Details: #{appointment.start_time.strftime("%B %-d at %l %P")}: #{appointment.description}. Thanks again and see you soon!"
+        @client.account.messages.create(
+          from: ENV["TWILIO_NUMBER"],
+          to: sitter.phone,
+          body: body
+        )
+        appointment.update_attribute(:reminder_sent, false)
+      end
+    end
+  end
 
   private
 

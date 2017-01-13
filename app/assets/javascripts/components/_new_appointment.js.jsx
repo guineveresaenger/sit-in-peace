@@ -48,13 +48,15 @@ var NewAppointment = React.createClass({
       },
       success: (appointment) => {
         this.props.handleSubmit(appointment)
-
+        console.log("I just made this appointment:");
+        console.log(appointment);
+        // now message sitters - each one in our saved list
+        for(var i = 0; i < this.state.potSitterIDs.length; i++){
+          this.props.messageSitter(this.state.potSitterIDs[i], description, date, hour, appointment.id)
+        }
       }
     })
-    // now message sitters - each one in our saved list
-    for(var i = 0; i < this.state.potSitterIDs.length; i++){
-      this.props.messageSitter(this.state.potSitterIDs[i], description, date, hour)
-    }
+
   },
 
   setSitterName() {
