@@ -8,8 +8,6 @@ Rails.application.routes.draw do
     end
   end
 
-  #post 'messages/initiate' => 'messages#initiate', as: 'messages_initiate'
-
   root to: "site#index"
   get '/sitters' => 'site#sitters'
 

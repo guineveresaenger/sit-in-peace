@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
 
     # send the reply
     boot_twilio
-    sms = @client.account.messages.create(
+    @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
       to: from_number,
       body: "Thank you so much for helping me out, #{sitter.name}."
@@ -28,12 +28,12 @@ class MessagesController < ApplicationController
     sitter_number = params['phone']
 
     body = "Hello, this is Guinevere. I was hoping you might be available for watching Brendan? Details below. #{params['date']} @ #{params['hour']}: #{params['description']}. If you can do this, please reply with the following number: #{params['appt_id']} "
-    sms = @client.account.messages.create(
+    @client.account.messages.create(
       from: ENV["TWILIO_NUMBER"],
       to: sitter_number,
       body: body,
     )
-    sms = @client
+
     redirect_to root_path
 
   end

@@ -9,41 +9,49 @@
 Appointment.destroy_all
 Sitter.destroy_all
 
-Appointment.create!([
-  {
-    description: "THIS WEEK!",
-    start_time: DateTime.new(2017,1,9,8),
-    sitter_id: 1
-  },
-  {
-    description: "Watch Brendan",
-    start_time: DateTime.new(2017,1,10,8),
-    sitter_id: 1
-  },
-  {
-    description: "NEXT WEEK!",
-    start_time: DateTime.new(2017,1,17,8)
-  },
-  {
-    description: "SHOULD BE LAST ONE",
-    start_time: DateTime.new(2017,1,11,8),
-    sitter_id: 2
-  },
-
-])
-
-Sitter.create!([
+sitter_one = Sitter.create!(
   {
     name: "Me",
     phone: "2065187269",
     email: "me@awesome.com"
-  },
+  }
+)
+
+sitter_two = Sitter.create!(
   {
     name: "Myself",
     phone: "2065187269",
     email: "myself@better.com"
-  },
+  }
+)
+
+Sitter.create!(
+  {
     name: "andI",
     phone: "2065187269",
     email: "not_andy@meh.com"
-  ])
+  }
+)
+
+sitter_one.appointments.create!([
+  {
+    description: "THIS WEEK!",
+    start_time: DateTime.new(2017,1,9,8),
+  },
+  {
+    description: "Watch Brendan",
+    start_time: DateTime.new(2017,1,10,8),
+  }]
+)
+
+sitter_two.appointments.create!(
+  {
+    description: "NEXT WEEK!",
+    start_time: DateTime.new(2017,1,17,8)
+  }
+)
+
+Appointment.create!({
+    description: "SHOULD BE LAST ONE",
+    start_time: DateTime.new(2017,1,11,8),
+})
