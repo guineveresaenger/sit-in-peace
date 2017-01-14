@@ -3,7 +3,10 @@ var Week = React.createClass({
     return {appointments: [],
       sitters: [],
       showDetails: false,
-      currentAppointment: null,}
+      currentAppointment: null,
+      currentDay: null,
+      currentHour:null,
+    }
   },
   componentWillMount() {
     var appointments = $.getJSON('/api/v1/appointments.json');
@@ -60,6 +63,21 @@ var Week = React.createClass({
 
     updatedAppointments.push(appointment);
     this.setState({appointments: updatedAppointments, showDetails: false})
+  },
+
+  createNewAppointment(day, hour){
+    console.log("in Week: clicked day " + day + "and hour" + hour);
+    if (this.state.showAddNew){
+      this.setState({
+        showAddNew: false,
+      })
+    } else {
+      this.setState({
+        currentDay: day,
+        currentHour: hour,
+        showAddNew: true,
+      })
+    }
   },
 
   filterByWeek() {
@@ -139,6 +157,7 @@ var Week = React.createClass({
             thisWeekAppts={this.filterByWeek()}
             displayDetails={this.getDetails}
             sitters={this.state.sitters}
+            createNewAppointment={this.createNewAppointment}
           />
 
         </div>
@@ -157,17 +176,19 @@ var Week = React.createClass({
     return (
       <div>
 
-        <button onClick={this.onButtonClick} className='button'>Add a new appointment</button>
-        {this.state.showAddNew ? <NewAppointment handleSubmit={this.handleSubmit}
-        sitters={this.state.sitters}
-        messageSitter={this.messageSitter}/> : null}
-        {this.state.showDetails ?
-          <AppointmentDetails appointment={this.state.currentAppointment}
-          handleEdit={this.handleEdit}
-          handleDelete={this.handleDelete}
-          sitters={this.state.sitters}
+        <button onClick={ this.onButtonClick } className='button'>Add a new appointment</button>
+        { this.state.showAddNew ? <NewAppointment handleSubmit={ this.handleSubmit }
+        sitters={ this.state.sitters }
+        messageSitter={ this.messageSitter }/> : null}
+        { this.state.showDetails ?
+          <AppointmentDetails appointment={ this.state.currentAppointment }
+          handleEdit={ this.handleEdit }
+          handleDelete={ this.handleDelete }
+          sitters={ this.state.sitters }
+          currentDay={ this.state.currentAppointment }
+          currentHour={ this.state.currentHour }
             /> : null}
-        <WeekdayLabels dateRange={this.props.dateRange}/>
+        <WeekdayLabels dateRange={ this.props.dateRange }/>
         {hours}
         BOO
         {sitters}

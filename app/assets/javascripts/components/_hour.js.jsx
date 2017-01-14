@@ -11,7 +11,7 @@ var Hour = React.createClass({
   },
 
   handleClick(day) {
-
+    this.props.createNewAppointment(day, this.props.hourName)
     console.log("clicked a div on day: "+ day  +" at " + this.props.hourName);
   },
 
