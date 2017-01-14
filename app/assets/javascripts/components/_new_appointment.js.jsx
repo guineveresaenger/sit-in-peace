@@ -49,6 +49,7 @@ var NewAppointment = React.createClass({
         this.props.handleSubmit(appointment)
 
         // now message sitters - each one in our saved list
+        console.log(this.state.potSitterIDs);
         for(var i = 0; i < this.state.potSitterIDs.length; i++){
           this.props.messageSitter(this.state.potSitterIDs[i], appointment)
         }
@@ -71,7 +72,7 @@ var NewAppointment = React.createClass({
     });
   },
 
-  sittersToMessage(sitter) {
+  addToPotSitters(sitter) {
     // this will add sitter id's to a list stored in state, so we can message all selected upon submit.
     var sittersSoFar = this.state.potSitterIDs;
     if (this.state.potSitterIDs.indexOf(sitter.id) === -1) {
@@ -80,6 +81,18 @@ var NewAppointment = React.createClass({
         potSitterIDs: sittersSoFar
       })
     }
+  },
+
+  removeFromPotSitters(sitter) {
+    // this does the opposite
+    var sittersSoFar = this.state.potSitterIDs;
+    var index = this.state.potSitterIDs.indexOf(sitter.id)
+    if (index >= 0) {
+      sittersSoFar.splice(index, 1);
+    }
+    this.setState({
+      potSitterIDs: sittersSoFar
+    })
   },
 
   toggleMessageSitters() {
@@ -148,8 +161,11 @@ var NewAppointment = React.createClass({
           Select sitters to message
         </button>
 
-        {this.state.showMessageSitters ?
-          <SelectSitters sitters= {this.props.sitters} messageSitter={this.sittersToMessage}/> : null
+        { this.state.showMessageSitters ?
+          <SelectSitters sitters= { this.props.sitters } messageSitter={ this.addToPotSitters }
+          unmessageSitter={ this.removeFromPotSitters }
+
+          /> : null
         }
         <button onClick={this.handleSubmit} className="button alert">
           Submit

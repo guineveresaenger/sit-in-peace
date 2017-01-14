@@ -14,6 +14,7 @@ class MessagesController < ApplicationController
     #if there is already sitter_id, tell sitter appointment is covered, and don't update sitter id.
     if appointment.sitter_id
       # find actual sitter
+      # TODO: if sitter just replied twice, tell them they've already accepted this commitment. Don't share the covering sitter's name.
       covering_sitter = Sitter.find(appointment.sitter_id)
       @client.account.messages.create(
         from: ENV["TWILIO_NUMBER"],
@@ -27,6 +28,13 @@ class MessagesController < ApplicationController
         body: "Thank you so much for helping me out, #{sitter.name}. You're on the schedule. I'll send you a reminder the day before."
       )
       appointment.update_attribute(:sitter_id, sitter.id)
+      # also send confirmation to Parent (me!!)
+      # TODO: use Parent info; clean up info sent along in confirmation.
+      @client.account.messages.create(
+        from: ENV["TWILIO_NUMBER"],
+        to: 2065187269,
+        body: "#{sitter.name} is taking care of an appointment for you."
+      )
     end
   end
 
