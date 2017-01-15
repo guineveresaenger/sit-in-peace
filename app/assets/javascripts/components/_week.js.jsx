@@ -66,7 +66,6 @@ var Week = React.createClass({
   },
 
   createNewAppointment(day, hour){
-    console.log("in Week: clicked day " + day + "and hour" + hour);
     if (this.state.showAddNew){
       this.setState({
         showAddNew: false,
@@ -177,21 +176,23 @@ var Week = React.createClass({
       <div>
 
         <button onClick={ this.onButtonClick } className='button'>Add a new appointment</button>
-        { this.state.showAddNew ? <NewAppointment handleSubmit={ this.handleSubmit }
-        sitters={ this.state.sitters }
-        messageSitter={ this.messageSitter }/> : null}
+        { this.state.showAddNew ?
+          <NewAppointment
+            handleSubmit={ this.handleSubmit }
+            sitters={ this.state.sitters }
+            messageSitter={ this.messageSitter }
+            currentDay={ this.state.currentDay }
+            currentHour={ this.state.currentHour }
+          /> : null}
         { this.state.showDetails ?
           <AppointmentDetails appointment={ this.state.currentAppointment }
           handleEdit={ this.handleEdit }
           handleDelete={ this.handleDelete }
           sitters={ this.state.sitters }
-          currentDay={ this.state.currentAppointment }
-          currentHour={ this.state.currentHour }
+
             /> : null}
         <WeekdayLabels dateRange={ this.props.dateRange }/>
         {hours}
-        BOO
-        {sitters}
       </div>
     )
   }

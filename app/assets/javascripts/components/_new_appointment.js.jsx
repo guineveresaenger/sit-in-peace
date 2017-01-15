@@ -1,19 +1,27 @@
 var NewAppointment = React.createClass({
   getInitialState(){
+    this.props.currentDay === null ?
+      day = '' :
+      day = this.props.currentDay
+    this.props.currentHour ===null ?
+      hour= '' :
+      hour= this.props.currentHour
+
     return {
       potSitterIDs: [],
       showMessageSitters: false,
       showDropDown: false,
+      currentDay: day,
+      currentHour: hour,
     }
   },
 
   handleSubmit(){
-
-    var date = this.refs.date.value;
-    var hour = this.refs.hour.value;
+    console.log("submit button clicked!");
+    var date = this.state.currentDay;
+    var hour = this.state.currentHour;
     var description = this.refs.description.value;
 
-    // TODO: uncomment the next 3 lines!
     if(!this.fieldsComplete()){
       return;
     }
@@ -101,7 +109,6 @@ var NewAppointment = React.createClass({
       showMessageSitters: !this.state.showMessageSitters,
       showDropDown: false,
     })
-
   },
 
   toggleShowDropDown(){
@@ -129,7 +136,21 @@ var NewAppointment = React.createClass({
     return false;
   },
 
+  handleCurrentDayChange(event) {
+    this.setState({
+      currentDay: event.target.value,
+    });
+  },
+
+  handleCurrentHourChange(event) {
+    this.setState({
+      currentHour: event.target.value,
+    });
+  },
+
   render() {
+    console.log(this.state.currentDay);
+    console.log(this.state.currentHour);
     var sitterChoices = [];
     for(var i = 0; i < this.props.sitters.length; i++){
       sitterChoices.push(
@@ -140,14 +161,16 @@ var NewAppointment = React.createClass({
     }
     return (
       <div>
-        <input type='date' ref='date' placeholder='Enter the day of the appointment' />
-        <input ref='hour' placeholder='00:00' />
-        <input ref='description' placeholder='Enter the description of the appointment' />
+        <input type='date' ref='date' value={this.state.currentDay} onChange={ this.handleCurrentDayChange }
+        />
+      <input ref='hour' value={ this.state.currentHour } onChange={ this.handleCurrentHourChange }
+        />
+        <input ref='description' placeholder='Enter the description of the appointment'
+        />
 
         <button onClick={this.toggleShowDropDown} className='button'>
           Assign a sitter manually
         </button>
-
 
         { this.state.showDropDown ?
           <select ref="sitterName">
@@ -155,7 +178,6 @@ var NewAppointment = React.createClass({
             {sitterChoices}
           </select> : null
         }
-
 
         <button onClick={this.toggleMessageSitters} className='button'>
           Select sitters to message
