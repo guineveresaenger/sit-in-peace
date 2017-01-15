@@ -208,7 +208,6 @@ var AppointmentDetails = React.createClass({
     }
     return(
       <div>
-        I am an appointment. You can edit me. Or delete me.
         <input type='date' value={ this.state.date } onChange={ this.handleDateChange }/>
         <input value={ this.state.hour } onChange={ this.handleHourChange }/>
         <input value={ this.state.description } onChange={ this.handleDescriptionChange }/>

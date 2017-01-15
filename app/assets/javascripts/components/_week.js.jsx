@@ -176,7 +176,15 @@ var Week = React.createClass({
     }
     return (
       <div>
-        <button onClick={this.onButtonClick} className="button">Add a new appointment!</button>
+
+
+        {this.state.showDetails ?
+          <button onClick={this.onButtonClick} className="button">Hide Details
+          </button> :
+          <button onClick={this.onButtonClick} className="button">Add a new appointment!</button>
+
+
+        }
 
         { this.state.showDetails ?
           <AppointmentDetails appointment={ this.state.currentAppointment }
