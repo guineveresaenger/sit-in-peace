@@ -5,7 +5,10 @@ var NewAppointment = React.createClass({
       day = this.props.currentDay
     this.props.currentHour ===null ?
       hour= '' :
-      hour= this.props.currentHour
+      (this.props.currentHour.length > 1 ? 
+        hour= this.props.currentHour + ":00" :
+        hour = "0" + this.props.currentHour + ":00"
+      )
 
     return {
       potSitterIDs: [],
@@ -149,8 +152,6 @@ var NewAppointment = React.createClass({
   },
 
   render() {
-    console.log(this.state.currentDay);
-    console.log(this.state.currentHour);
     var sitterChoices = [];
     for(var i = 0; i < this.props.sitters.length; i++){
       sitterChoices.push(
