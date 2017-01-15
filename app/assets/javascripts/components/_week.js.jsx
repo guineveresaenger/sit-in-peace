@@ -4,8 +4,8 @@ var Week = React.createClass({
       sitters: [],
       showDetails: false,
       currentAppointment: null,
-      currentDay: null,
-      currentHour:null,
+      currentDay: '',
+      currentHour:'',
     }
   },
   componentWillMount() {
@@ -16,7 +16,6 @@ var Week = React.createClass({
       this.setState({
         appointments: appointments[0],
         sitters: sitters[0],
-        showAddNew: false,
       })
     });
   },
@@ -70,8 +69,11 @@ var Week = React.createClass({
     if (this.state.showDetails){
       this.setState({
         showDetails: false,
+        currentAppointment: null,
       })
     } else {
+      console.log(day);
+      console.log(hour);
       this.setState({
         currentDay: day,
         currentHour: hour,
@@ -110,6 +112,7 @@ var Week = React.createClass({
     var thisAppointment = this.state.appointments.find((appointment) => {
       return appointment.id == id;
     });
+    console.log("Here's this appointment: " + thisAppointment);
     // return thisAppointment;
     this.setState({
       currentAppointment: thisAppointment,
@@ -118,13 +121,13 @@ var Week = React.createClass({
   },
 
   onButtonClick() {
-    if (this.state.showAddNew){
+    if (this.state.showDetails){
       this.setState({
-        showAddNew: false,
+        showDetails: false,
       })
     } else {
       this.setState({
-        showAddNew: true,
+        showDetails: true,
       })
     }
   },
@@ -156,6 +159,8 @@ var Week = React.createClass({
   },
 
   render() {
+    console.log(this.state.hour);
+    console.log(this.state.day);
 
     // make 24 table rows!
     var hours = [];
@@ -175,19 +180,9 @@ var Week = React.createClass({
         </div>
       );
     }
-    var sitters = [];
-    for(var i = 0; i < this.state.sitters.length; i++) {
-      sitters.push(
-        <div key={this.state.sitters[i].id}>
-          <SitterDetails
-            sitter={this.state.sitters[i]}
-          />
-        </div>
-      );
-    }
     return (
       <div>
-
+        <button onClick={this.onButtonClick}>Add a new appointment!</button>
 
         { this.state.showDetails ?
           <AppointmentDetails appointment={ this.state.currentAppointment }

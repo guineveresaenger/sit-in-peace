@@ -36,9 +36,8 @@ var Day = React.createClass({
       )
 
     });
-
     return (
-      (slotAppts.length == 0) ? null : <div>{slotAppts}</div>
+      <div>{slotAppts}</div>
     )
   }
 });

@@ -22,6 +22,15 @@ var AppointmentDetails = React.createClass({
     });
   },
 
+  formatPrefilledDate(date){
+    if (date.length > 1){
+      hour= date + ":00"
+    } else {
+      hour = "0" + date + ":00"
+    }
+    return hour;
+  },
+
   stateFromProps(props){
     var sitterName;
     var date;
@@ -29,11 +38,12 @@ var AppointmentDetails = React.createClass({
     var description;
     if (this.props.appointment === null){
       date = this.props.currentDay;
-      if (this.props.currentHour.length > 1){
-        hour= this.props.currentHour + ":00"
+      if (this.props.currentHour === '') {
+        hour = ""
       } else {
-        hour = "0" + this.props.currentHour + ":00"
+        hour = this.formatPrefilledDate(this.props.currentHour);
       }
+
       description = '';
       sitterName = '';
     } else {
@@ -189,6 +199,7 @@ var AppointmentDetails = React.createClass({
   },
 
   render() {
+    console.log(this.props.appointment);
     var sitterChoices = [];
     for(var i = 0; i < this.props.sitters.length; i++){
       sitterChoices.push(
