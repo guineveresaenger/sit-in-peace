@@ -66,14 +66,13 @@ var Week = React.createClass({
 
   createNewAppointment(day, hour){
     console.log("clicked on a div:" + day + hour);
-    if (this.state.showDetails){
-      this.setState({
-        showDetails: false,
-        currentAppointment: null,
-      })
+    if (this.state.currentAppointment){
+      if(this.state.currentAppointment.start_time.substr(0,10) !== day || this.state.currentAppointment.start_time.substr(11,5) !== hour){
+        this.setState({
+          currentAppointment: null,
+        })
+      }
     } else {
-      console.log(day);
-      console.log(hour);
       this.setState({
         currentDay: day,
         currentHour: hour,
@@ -112,8 +111,6 @@ var Week = React.createClass({
     var thisAppointment = this.state.appointments.find((appointment) => {
       return appointment.id == id;
     });
-    console.log("Here's this appointment: " + thisAppointment);
-    // return thisAppointment;
     this.setState({
       currentAppointment: thisAppointment,
       showDetails: true,
@@ -121,15 +118,12 @@ var Week = React.createClass({
   },
 
   onButtonClick() {
-    if (this.state.showDetails){
-      this.setState({
-        showDetails: false,
-      })
-    } else {
-      this.setState({
-        showDetails: true,
-      })
-    }
+    this.setState({
+      showDetails: !this.state.showDetails,
+      currentDay: '',
+      currentHour:'',
+
+    })
   },
 
   messageSitter(sitter_id, appointment){
@@ -159,8 +153,8 @@ var Week = React.createClass({
   },
 
   render() {
-    console.log(this.state.hour);
-    console.log(this.state.day);
+    // console.log(this.state.currentHour);
+    // console.log(this.state.currentDay);
 
     // make 24 table rows!
     var hours = [];
@@ -182,7 +176,7 @@ var Week = React.createClass({
     }
     return (
       <div>
-        <button onClick={this.onButtonClick}>Add a new appointment!</button>
+        <button onClick={this.onButtonClick} className="button">Add a new appointment!</button>
 
         { this.state.showDetails ?
           <AppointmentDetails appointment={ this.state.currentAppointment }

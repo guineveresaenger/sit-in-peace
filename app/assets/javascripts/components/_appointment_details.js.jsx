@@ -5,6 +5,8 @@ var AppointmentDetails = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    console.log(this.props);
+    console.log(nextProps);
     if (this.props !== nextProps){
       this.setState(this.stateFromProps(nextProps));
     }
@@ -21,29 +23,25 @@ var AppointmentDetails = React.createClass({
       return sitter.name == name;
     });
   },
-
-  formatPrefilledDate(date){
-    if (date.length > 1){
-      hour= date + ":00"
-    } else {
-      hour = "0" + date + ":00"
-    }
-    return hour;
-  },
+  //
+  // formatPrefilledHour(hour){
+  //   var formattedHour;
+  //   if (hour.length > 1){
+  //     formattedHour = hour + ":00"
+  //   } else {
+  //     formattedHour = "0" + hour + ":00"
+  //   }
+  //   return formattedHour;
+  // },
 
   stateFromProps(props){
     var sitterName;
     var date;
     var hour;
     var description;
-    if (this.props.appointment === null){
-      date = this.props.currentDay;
-      if (this.props.currentHour === '') {
-        hour = ""
-      } else {
-        hour = this.formatPrefilledDate(this.props.currentHour);
-      }
-
+    if (props.appointment === null){
+      date = props.currentDay;
+      hour = props.currentHour;
       description = '';
       sitterName = '';
     } else {

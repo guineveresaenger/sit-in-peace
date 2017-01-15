@@ -9,9 +9,19 @@ var Hour = React.createClass({
     });
     return thisHourAppts;
   },
+  formatHour(hour){
+    var formattedHour;
+    if (hour.toString().length > 1){
+      formattedHour = hour + ":00"
+    } else {
+      formattedHour = "0" + hour + ":00"
+    }
+    return formattedHour;
+  },
 
   handleClick(day) {
-    this.props.createNewAppointment(day, this.props.hourName)
+    hour = this.formatHour(this.props.hourName);
+    this.props.createNewAppointment(day, hour)
   },
 
   render() {
