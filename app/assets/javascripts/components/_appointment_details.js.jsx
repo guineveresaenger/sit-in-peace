@@ -30,6 +30,8 @@ var AppointmentDetails = React.createClass({
       hour: props.appointment.start_time.substr(11,5),
       description: props.appointment.description,
       sitter_name: sitterName,
+      potSitterIDs:[],
+      showMessageSitters: false,
 
     };
   },
@@ -51,10 +53,14 @@ var AppointmentDetails = React.createClass({
       start_time: completeTime,
       description: description,
       sitter_id: sitter_id,
-    
+
     };
     console.log(appointment);
     this.props.handleEdit(appointment);
+    console.log(this.state.potSitterIDs);
+    for(var i = 0; i < this.state.potSitterIDs.length; i++){
+      this.props.messageSitter(this.state.potSitterIDs[i], appointment)
+    }
 
   },
   handleDelete(){
@@ -85,6 +91,37 @@ var AppointmentDetails = React.createClass({
     });
   },
 
+  addToPotSitters(sitter) {
+    // this will add sitter id's to a list stored in state, so we can message all selected upon submit.
+    var sittersSoFar = this.state.potSitterIDs;
+    if (this.state.potSitterIDs.indexOf(sitter.id) === -1) {
+      sittersSoFar.push(sitter.id)
+      this.setState({
+        potSitterIDs: sittersSoFar
+      })
+    }
+  },
+
+  removeFromPotSitters(sitter) {
+    // this does the opposite
+    var sittersSoFar = this.state.potSitterIDs;
+    var index = this.state.potSitterIDs.indexOf(sitter.id)
+    if (index >= 0) {
+      sittersSoFar.splice(index, 1);
+    }
+    this.setState({
+      potSitterIDs: sittersSoFar
+    })
+  },
+
+  toggleMessageSitters() {
+    console.log("toggleMessageSitters called");
+    this.setState({
+      showMessageSitters: !this.state.showMessageSitters,
+      // showDropDown: false,
+    })
+  },
+
   render() {
     var sitterChoices = [];
     for(var i = 0; i < this.props.sitters.length; i++){
@@ -107,7 +144,16 @@ var AppointmentDetails = React.createClass({
           {sitterChoices}
         </select>
 
+        <button onClick={this.toggleMessageSitters} className='button'>
+          Select sitters to message
+        </button>
 
+        { this.state.showMessageSitters ?
+          <SelectSitters sitters= { this.props.sitters } messageSitter={ this.addToPotSitters }
+          unmessageSitter={ this.removeFromPotSitters }
+
+          /> : null
+        }
 
 
         <button className='button' onClick={ this.handleEdit }>

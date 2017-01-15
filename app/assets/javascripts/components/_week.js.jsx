@@ -189,6 +189,7 @@ var Week = React.createClass({
           handleEdit={ this.handleEdit }
           handleDelete={ this.handleDelete }
           sitters={ this.state.sitters }
+          messageSitter={ this.messageSitter }
 
             /> : null}
         <WeekdayLabels dateRange={ this.props.dateRange }/>
