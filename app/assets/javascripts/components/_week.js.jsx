@@ -23,7 +23,7 @@ var Week = React.createClass({
 
   handleSubmit(appointment){
     var newState = this.state.appointments.concat(appointment);
-    this.setState({ appointments: newState, showAddNew: false });
+    this.setState({ appointments: newState, showDetails: false });
     console.log("appointment submitted!");
   },
 
@@ -68,13 +68,13 @@ var Week = React.createClass({
   createNewAppointment(day, hour){
     if (this.state.showAddNew){
       this.setState({
-        showAddNew: false,
+        showDetails: false,
       })
     } else {
       this.setState({
         currentDay: day,
         currentHour: hour,
-        showAddNew: true,
+        showDetails: true,
       })
     }
   },
@@ -175,22 +175,16 @@ var Week = React.createClass({
     return (
       <div>
 
-        <button onClick={ this.onButtonClick } className='button'>Add a new appointment</button>
-        { this.state.showAddNew ?
-          <NewAppointment
-            handleSubmit={ this.handleSubmit }
-            sitters={ this.state.sitters }
-            messageSitter={ this.messageSitter }
-            currentDay={ this.state.currentDay }
-            currentHour={ this.state.currentHour }
-          /> : null}
+
         { this.state.showDetails ?
           <AppointmentDetails appointment={ this.state.currentAppointment }
           handleEdit={ this.handleEdit }
           handleDelete={ this.handleDelete }
+          handleSubmit={this.handleSubmit}
           sitters={ this.state.sitters }
           messageSitter={ this.messageSitter }
-
+          currentDay={ this.state.currentDay }
+          currentHour={ this.state.currentHour }
             /> : null}
         <WeekdayLabels dateRange={ this.props.dateRange }/>
         {hours}

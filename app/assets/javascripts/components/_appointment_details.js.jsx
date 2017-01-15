@@ -24,11 +24,32 @@ var AppointmentDetails = React.createClass({
 
   stateFromProps(props){
     var sitterName;
-    this.findSitterByID(props.appointment.sitter_id) ? sitterName = this.findSitterByID(props.appointment.sitter_id).name : sitterName = ''
+    var date;
+    var hour;
+    var description;
+    if (this.props.appointment === null){
+      date = this.props.currentDay;
+      if (this.props.currentHour.length > 1){
+        hour= this.props.currentHour + ":00"
+      } else {
+        hour = "0" + this.props.currentHour + ":00"
+      }
+      description = '';
+      sitterName = '';
+    } else {
+      date = props.appointment.start_time.substr(0,10);
+      hour = props.appointment.start_time.substr(11,5);
+      description = props.appointment.description;
+      if(this.findSitterByID(props.appointment.sitter_id)){
+        sitterName = props.appointment.sitter_id;
+      } else{
+        sitterName = '';
+      }
+    }
     return {
-      date: props.appointment.start_time.substr(0,10),
-      hour: props.appointment.start_time.substr(11,5),
-      description: props.appointment.description,
+      date: date,
+      hour: hour,
+      description: description,
       sitter_name: sitterName,
       potSitterIDs:[],
       showMessageSitters: false,
@@ -43,7 +64,6 @@ var AppointmentDetails = React.createClass({
     var description = this.state.description;
     var sitter_id;
     this.findSitterByName(this.state.sitter_name) ? sitter_id = this.findSitterByName(this.state.sitter_name).id : sitter_id = null
-
 
 
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
@@ -65,6 +85,52 @@ var AppointmentDetails = React.createClass({
   },
   handleDelete(){
     this.props.handleDelete(this.props.appointment.id)
+  },
+
+  handleSubmit(){
+    console.log("submit button clicked!");
+    var date = this.state.date;
+    var hour = this.state.hour;
+    var description = this.state.description;
+
+    // if(!this.fieldsComplete()){
+    //   return;
+    // }
+
+    // TODO: customize input form so it allows only correctly formatted date
+
+    // use Moment.js to format into a valid date
+    var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
+    console.log(completeTime);
+
+
+
+    // TODO: make the following lines more concise somehow?
+    var sitter_id;
+    this.findSitterByName(this.state.sitter_name) ? sitter_id = this.findSitterByName(this.state.sitter_name).id : sitter_id = null
+
+    // post to database
+    $.ajax({
+      url: '/api/v1/appointments',
+      type: 'POST',
+      data: {appointment:
+        {
+          start_time: completeTime,
+          description: description,
+          sitter_id: sitter_id,
+
+        }
+      },
+      success: (appointment) => {
+        this.props.handleSubmit(appointment)
+
+        // now message sitters - each one in our saved list
+        console.log(this.state.potSitterIDs);
+        for(var i = 0; i < this.state.potSitterIDs.length; i++){
+          this.props.messageSitter(this.state.potSitterIDs[i], appointment)
+        }
+      }
+    })
   },
 
   handleDateChange(event) {
@@ -161,6 +227,9 @@ var AppointmentDetails = React.createClass({
         </button>
         <button className='button' onClick={ this.handleDelete }>
           Delete
+        </button>
+        <button onClick={this.handleSubmit} className="button alert">
+          Submit
         </button>
 
       </div>
