@@ -66,7 +66,8 @@ var Week = React.createClass({
   },
 
   createNewAppointment(day, hour){
-    if (this.state.showAddNew){
+    console.log("clicked on a div:" + day + hour);
+    if (this.state.showDetails){
       this.setState({
         showDetails: false,
       })
@@ -92,6 +93,18 @@ var Week = React.createClass({
     });
     return thisWeekAppts;
   },
+
+  // filterBySitter(appointments) {
+  //   var thisSitterAppointments = [];
+  //   appointments.map((appt) => {
+  //     for(var i = 0; i < appointments.length; i++) {
+  //       if(appt.sitter_id == 8) {
+  //         thisSitterAppointments.push(appt);
+  //       }
+  //     }
+  //   });
+  //   return thisSitterAppointments;
+  // },
 
   getDetails(id){
     var thisAppointment = this.state.appointments.find((appointment) => {
