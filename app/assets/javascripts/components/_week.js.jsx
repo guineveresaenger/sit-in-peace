@@ -66,19 +66,14 @@ var Week = React.createClass({
 
   createNewAppointment(day, hour){
     console.log("clicked on a div:" + day + hour);
-    if (this.state.currentAppointment){
-      if(this.state.currentAppointment.start_time.substr(0,10) !== day || this.state.currentAppointment.start_time.substr(11,5) !== hour){
-        this.setState({
-          currentAppointment: null,
-        })
-      }
-    } else {
+
       this.setState({
+        currentAppointment: null,
         currentDay: day,
         currentHour: hour,
         showDetails: true,
       })
-    }
+
   },
 
   filterByWeek() {
@@ -155,7 +150,7 @@ var Week = React.createClass({
   render() {
     // console.log(this.state.currentHour);
     // console.log(this.state.currentDay);
-
+    console.log(this.state.currentAppointment);
     // make 24 table rows!
     var hours = [];
     for (var i = 0; i < 24; i++){
@@ -176,18 +171,14 @@ var Week = React.createClass({
     }
     return (
       <div>
-
-
         {this.state.showDetails ?
           <button onClick={this.onButtonClick} className="button">Hide Details
           </button> :
           <button onClick={this.onButtonClick} className="button">Add a new appointment!</button>
-
-
         }
-
         { this.state.showDetails ?
-          <AppointmentDetails appointment={ this.state.currentAppointment }
+          <AppointmentDetails
+          appointment={ this.state.currentAppointment }
           handleEdit={ this.handleEdit }
           handleDelete={ this.handleDelete }
           handleSubmit={this.handleSubmit}
@@ -195,7 +186,7 @@ var Week = React.createClass({
           messageSitter={ this.messageSitter }
           currentDay={ this.state.currentDay }
           currentHour={ this.state.currentHour }
-            /> : null}
+          /> : null}
         <WeekdayLabels dateRange={ this.props.dateRange }/>
         {hours}
       </div>

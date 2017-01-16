@@ -5,8 +5,6 @@ var AppointmentDetails = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props);
-    console.log(nextProps);
     if (this.props !== nextProps){
       this.setState(this.stateFromProps(nextProps));
     }
@@ -23,16 +21,6 @@ var AppointmentDetails = React.createClass({
       return sitter.name == name;
     });
   },
-  //
-  // formatPrefilledHour(hour){
-  //   var formattedHour;
-  //   if (hour.length > 1){
-  //     formattedHour = hour + ":00"
-  //   } else {
-  //     formattedHour = "0" + hour + ":00"
-  //   }
-  //   return formattedHour;
-  // },
 
   stateFromProps(props){
     var sitterName;
@@ -61,7 +49,6 @@ var AppointmentDetails = React.createClass({
       sitter_name: sitterName,
       potSitterIDs:[],
       showMessageSitters: false,
-
     };
   },
 
@@ -83,9 +70,7 @@ var AppointmentDetails = React.createClass({
       sitter_id: sitter_id,
 
     };
-    console.log(appointment);
     this.props.handleEdit(appointment);
-    console.log(this.state.potSitterIDs);
     for(var i = 0; i < this.state.potSitterIDs.length; i++){
       this.props.messageSitter(this.state.potSitterIDs[i], appointment)
     }
@@ -96,7 +81,6 @@ var AppointmentDetails = React.createClass({
   },
 
   handleSubmit(){
-    console.log("submit button clicked!");
     var date = this.state.date;
     var hour = this.state.hour;
     var description = this.state.description;
@@ -109,9 +93,6 @@ var AppointmentDetails = React.createClass({
 
     // use Moment.js to format into a valid date
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
-    console.log(completeTime);
-
-
 
     // TODO: make the following lines more concise somehow?
     var sitter_id;
@@ -133,7 +114,6 @@ var AppointmentDetails = React.createClass({
         this.props.handleSubmit(appointment)
 
         // now message sitters - each one in our saved list
-        console.log(this.state.potSitterIDs);
         for(var i = 0; i < this.state.potSitterIDs.length; i++){
           this.props.messageSitter(this.state.potSitterIDs[i], appointment)
         }
@@ -158,9 +138,7 @@ var AppointmentDetails = React.createClass({
     });
   },
   handleSitterChange(event) {
-      console.log("sitterCHange called");
     this.setState({
-
       sitter_name: event.target.value,
     });
   },
@@ -189,10 +167,8 @@ var AppointmentDetails = React.createClass({
   },
 
   toggleMessageSitters() {
-    console.log("toggleMessageSitters called");
     this.setState({
       showMessageSitters: !this.state.showMessageSitters,
-      // showDropDown: false,
     })
   },
 
@@ -209,8 +185,8 @@ var AppointmentDetails = React.createClass({
     return(
       <div>
         <input type='date' value={ this.state.date } onChange={ this.handleDateChange }/>
-        <input value={ this.state.hour } onChange={ this.handleHourChange }/>
-        <input value={ this.state.description } onChange={ this.handleDescriptionChange }/>
+        <input value={ this.state.hour } onChange={ this.handleHourChange } placeholder="00:00"/>
+        <input value={ this.state.description } onChange={ this.handleDescriptionChange } placeholder='Enter the description of the appointment'/>
 
         Pick a sitter:
         <select value={this.state.sitter_name} onChange={this.handleSitterChange}>
@@ -229,17 +205,19 @@ var AppointmentDetails = React.createClass({
           /> : null
         }
 
-
-        <button className='button' onClick={ this.handleEdit }>
-          Update
-        </button>
-        <button className='button' onClick={ this.handleDelete }>
-          Delete
-        </button>
+        {this.props.appointment ?
+        <div>
+          <button className='button' onClick={ this.handleEdit }>
+            Update
+          </button>
+          <button className='button' onClick={ this.handleDelete }>
+            Delete
+          </button>
+        </div> :
         <button onClick={this.handleSubmit} className="button alert">
           Submit
         </button>
-
+        }
       </div>
     )
   }

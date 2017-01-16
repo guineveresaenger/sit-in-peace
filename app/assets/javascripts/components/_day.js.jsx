@@ -13,31 +13,33 @@ var Day = React.createClass({
     this.props.displayDetails(id)
   },
 
-  findSitter(id) {
-    if( id === null) {
-      return null;
-    } else {
-        return this.props.sitters.find((sitter) => {
-          return sitter.id == id;
-        });
-      }
+  createNewAppointment(day) {
+    console.log("clicked a thing");
+    this.props.createNewAppointment(day);
   },
 
   render() {
     var slotAppts = this.filterByDay().map((appt) =>{
-      var sitterName;
-      this.findSitter(appt.sitter_id) ? sitterName = this.findSitter(appt.sitter_id).name : sitterName = ''
-
       return (
         <div key={appt.id} onClick={this.displayDetails.bind(this, appt.id)} >
           {appt.description}
-          {sitterName}
         </div>
       )
 
     });
-    return (
-      <div>{slotAppts}</div>
-    )
+    if(slotAppts.length == 0){
+      return (
+        <div
+       onClick={this.createNewAppointment.bind(this, this.props.dayDate)}>
+        </div>
+      )
+    } else {
+      return (
+        <div >
+          {slotAppts}
+        </div>
+
+      )
+    }
   }
 });
