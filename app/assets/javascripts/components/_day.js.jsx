@@ -27,7 +27,6 @@ var Day = React.createClass({
     var slotAppts = this.filterByDay().map((appt) =>{
       var sitterName;
       this.findSitter(appt.sitter_id) ? sitterName = this.findSitter(appt.sitter_id).name : sitterName = ''
-
       return (
         <div key={appt.id} onClick={this.displayDetails.bind(this, appt.id)} >
           {appt.description}
