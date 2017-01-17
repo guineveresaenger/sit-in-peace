@@ -36,22 +36,22 @@ Sitter.create!(
 sitter_one.appointments.create!([
   {
     description: "THIS WEEK!",
-    start_time: DateTime.new(2017,1,9,8),
+    start_time: DateTime.new(2017,1,16,8),
   },
   {
     description: "Watch Brendan",
-    start_time: DateTime.new(2017,1,10,8),
+    start_time: DateTime.new(2017,1,17,8),
   }]
 )
 
 sitter_two.appointments.create!(
   {
     description: "NEXT WEEK!",
-    start_time: DateTime.new(2017,1,17,8)
+    start_time: DateTime.new(2017,1,24,8)
   }
 )
 
 Appointment.create!({
     description: "SHOULD BE LAST ONE",
-    start_time: DateTime.new(2017,1,11,8),
+    start_time: DateTime.new(2017,1,18,8),
 })

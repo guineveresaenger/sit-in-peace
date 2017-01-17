@@ -73,12 +73,14 @@ var Week = React.createClass({
       })
   },
 
-  filterByWeek() {
+  filterByWeekAndUser() {
     var range = this.props.dateRange;
     // iterate over appts and see if they match the dates in our range
     var thisWeekAppts = []; this.state.appointments.map((appt) => {
       for(var i = 0; i < range.length; i++){
-        if(appt.start_time.substr(0,10) == range[i].substr(0,10)){
+        // TODO: get the user_id (that is, the sitter_id) via the rails view and plug in here instead of '1'.
+        // Use and extra if/else if the user is the Parent.
+        if((appt.start_time.substr(0,10) === range[i].substr(0,10)) && (appt.sitter_id === 1)){
           thisWeekAppts.push(appt);
         }
       }
@@ -86,16 +88,16 @@ var Week = React.createClass({
     return thisWeekAppts;
   },
 
-  // filterBySitter(appointments) {
-  //   var thisSitterAppointments = [];
+  // filterByUser(appointments) {
+  //   var userAppointments = [];
   //   appointments.map((appt) => {
   //     for(var i = 0; i < appointments.length; i++) {
-  //       if(appt.sitter_id == 8) {
-  //         thisSitterAppointments.push(appt);
+  //       if(appt.sitter_id == 1) {
+  //         userAppointments.push(appt);
   //       }
   //     }
   //   });
-  //   return thisSitterAppointments;
+  //   return userAppointments;
   // },
 
   getDetails(id){
@@ -147,6 +149,8 @@ var Week = React.createClass({
   render() {
     console.log(this.state.currentAppointment);
     // make 24 table rows!
+    // var weekAppts =this.filterByWeek();
+    // var userAppts = this.filterByUser(weekAppts);
     var hours = [];
     for (var i = 0; i < 24; i++){
       hours.push(
