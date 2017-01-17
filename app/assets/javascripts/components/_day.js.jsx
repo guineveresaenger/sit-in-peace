@@ -14,7 +14,6 @@ var Day = React.createClass({
   },
 
   createNewAppointment(day) {
-    console.log("clicked a thing");
     this.props.createNewAppointment(day);
   },
 
@@ -29,7 +28,7 @@ var Day = React.createClass({
     });
     if(slotAppts.length == 0){
       return (
-        <div
+        <div className="empty-div"
        onClick={this.createNewAppointment.bind(this, this.props.dayDate)}>
         </div>
       )

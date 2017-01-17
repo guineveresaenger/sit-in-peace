@@ -31,6 +31,10 @@ div.slot {
   border: 1px solid black;
 }
 
+div.empty-div {
+  height: 60px;
+}
+
 div.day-header {
   height: 80px;
 }

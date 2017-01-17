@@ -65,15 +65,12 @@ var Week = React.createClass({
   },
 
   createNewAppointment(day, hour){
-    console.log("clicked on a div:" + day + hour);
-
       this.setState({
         currentAppointment: null,
         currentDay: day,
         currentHour: hour,
         showDetails: true,
       })
-
   },
 
   filterByWeek() {
@@ -83,7 +80,6 @@ var Week = React.createClass({
       for(var i = 0; i < range.length; i++){
         if(appt.start_time.substr(0,10) == range[i].substr(0,10)){
           thisWeekAppts.push(appt);
-
         }
       }
     });
@@ -117,6 +113,7 @@ var Week = React.createClass({
       showDetails: !this.state.showDetails,
       currentDay: '',
       currentHour:'',
+      currentAppointment: null
 
     })
   },
@@ -148,8 +145,6 @@ var Week = React.createClass({
   },
 
   render() {
-    // console.log(this.state.currentHour);
-    // console.log(this.state.currentDay);
     console.log(this.state.currentAppointment);
     // make 24 table rows!
     var hours = [];
