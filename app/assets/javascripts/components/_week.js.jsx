@@ -4,8 +4,8 @@ var Week = React.createClass({
       sitters: [],
       showDetails: false,
       currentAppointment: null,
-      currentDay: null,
-      currentHour:null,
+      currentDay: '',
+      currentHour:'',
     }
   },
   componentWillMount() {
@@ -16,14 +16,13 @@ var Week = React.createClass({
       this.setState({
         appointments: appointments[0],
         sitters: sitters[0],
-        showAddNew: false,
       })
     });
   },
 
   handleSubmit(appointment){
     var newState = this.state.appointments.concat(appointment);
-    this.setState({ appointments: newState, showAddNew: false });
+    this.setState({ appointments: newState, showDetails: false });
     console.log("appointment submitted!");
   },
 
@@ -66,17 +65,12 @@ var Week = React.createClass({
   },
 
   createNewAppointment(day, hour){
-    if (this.state.showAddNew){
       this.setState({
-        showAddNew: false,
-      })
-    } else {
-      this.setState({
+        currentAppointment: null,
         currentDay: day,
         currentHour: hour,
-        showAddNew: true,
+        showDetails: true,
       })
-    }
   },
 
   filterByWeek() {
@@ -86,18 +80,28 @@ var Week = React.createClass({
       for(var i = 0; i < range.length; i++){
         if(appt.start_time.substr(0,10) == range[i].substr(0,10)){
           thisWeekAppts.push(appt);
-
         }
       }
     });
     return thisWeekAppts;
   },
 
+  // filterBySitter(appointments) {
+  //   var thisSitterAppointments = [];
+  //   appointments.map((appt) => {
+  //     for(var i = 0; i < appointments.length; i++) {
+  //       if(appt.sitter_id == 8) {
+  //         thisSitterAppointments.push(appt);
+  //       }
+  //     }
+  //   });
+  //   return thisSitterAppointments;
+  // },
+
   getDetails(id){
     var thisAppointment = this.state.appointments.find((appointment) => {
       return appointment.id == id;
     });
-    // return thisAppointment;
     this.setState({
       currentAppointment: thisAppointment,
       showDetails: true,
@@ -105,15 +109,13 @@ var Week = React.createClass({
   },
 
   onButtonClick() {
-    if (this.state.showAddNew){
-      this.setState({
-        showAddNew: false,
-      })
-    } else {
-      this.setState({
-        showAddNew: true,
-      })
-    }
+    this.setState({
+      showDetails: !this.state.showDetails,
+      currentDay: '',
+      currentHour:'',
+      currentAppointment: null
+
+    })
   },
 
   messageSitter(sitter_id, appointment){
@@ -143,7 +145,7 @@ var Week = React.createClass({
   },
 
   render() {
-
+    console.log(this.state.currentAppointment);
     // make 24 table rows!
     var hours = [];
     for (var i = 0; i < 24; i++){
@@ -162,35 +164,24 @@ var Week = React.createClass({
         </div>
       );
     }
-    var sitters = [];
-    for(var i = 0; i < this.state.sitters.length; i++) {
-      sitters.push(
-        <div key={this.state.sitters[i].id}>
-          <SitterDetails
-            sitter={this.state.sitters[i]}
-          />
-        </div>
-      );
-    }
     return (
       <div>
-
-        <button onClick={ this.onButtonClick } className='button'>Add a new appointment</button>
-        { this.state.showAddNew ?
-          <NewAppointment
-            handleSubmit={ this.handleSubmit }
-            sitters={ this.state.sitters }
-            messageSitter={ this.messageSitter }
-            currentDay={ this.state.currentDay }
-            currentHour={ this.state.currentHour }
-          /> : null}
+        {this.state.showDetails ?
+          <button onClick={this.onButtonClick} className="button">Hide Details
+          </button> :
+          <button onClick={this.onButtonClick} className="button">Add a new appointment!</button>
+        }
         { this.state.showDetails ?
-          <AppointmentDetails appointment={ this.state.currentAppointment }
+          <AppointmentDetails
+          appointment={ this.state.currentAppointment }
           handleEdit={ this.handleEdit }
           handleDelete={ this.handleDelete }
+          handleSubmit={this.handleSubmit}
           sitters={ this.state.sitters }
-
-            /> : null}
+          messageSitter={ this.messageSitter }
+          currentDay={ this.state.currentDay }
+          currentHour={ this.state.currentHour }
+          /> : null}
         <WeekdayLabels dateRange={ this.props.dateRange }/>
         {hours}
       </div>
