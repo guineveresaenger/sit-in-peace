@@ -41,7 +41,7 @@ var Main = React.createClass({
               <Week
                 startOfWeek={startOfWeek}
                 dateRange={dateRange}
-
+                currentSitter={this.props.currentSitter}
 
               />
             </div>
