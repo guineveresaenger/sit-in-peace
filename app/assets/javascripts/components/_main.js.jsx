@@ -39,8 +39,9 @@ var Main = React.createClass({
               <button className='button' onClick={this.displayCurrentWeek}>Current week!</button>
 
               <Week
-                startOfWeek={this.props.startOfWeek}
+                startOfWeek={startOfWeek}
                 dateRange={dateRange}
+
 
               />
             </div>
