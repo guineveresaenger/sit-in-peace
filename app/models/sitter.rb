@@ -1,7 +1,7 @@
 class Sitter < ActiveRecord::Base
   has_many :appointments
 
-  def self.from_google(auth)
+  def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |sitter|
       sitter.provider = auth.provider
       sitter.uid = auth.uid
