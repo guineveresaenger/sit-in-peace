@@ -14,6 +14,8 @@ gem 'figaro'
 gem 'whenever', :require => false
 # OAuth with Google
 gem "omniauth-google-oauth2", "~> 0.2.1"
+# OAuth with Facebook
+gem 'omniauth-facebook', '~> 1.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
