@@ -56,7 +56,6 @@ class MessagesController < ApplicationController
   def remind
     boot_twilio
 
-
     appointments = Appointment.all
     appointments.each do |appointment|
       if ((appointment.start_time - 1.day) < Time.now) && (appointment.sitter_id) && (appointment.reminder_sent == false)
