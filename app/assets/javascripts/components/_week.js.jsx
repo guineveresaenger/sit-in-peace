@@ -80,14 +80,12 @@ var Week = React.createClass({
     var thisWeekAppts = []; this.state.appointments.map((appt) => {
       if(currentSitter){
         for(var i = 0; i < range.length; i++){
-          // TODO: get the user_id (that is, the sitter_id) via the rails view and plug in here instead of '1'.
-          // Use and extra if/else if the user is the Parent.
           if((appt.start_time.substr(0,10) === range[i].substr(0,10))
           && ((appt.sitter_id === currentSitter.id) || (appt.sitter_id === null))){
             thisWeekAppts.push(appt);
           }
         }
-      } else { //this will eventually be the Parent View
+      } else {
         for(var i = 0; i < range.length; i++){
           if(appt.start_time.substr(0,10) === range[i].substr(0,10)) {
             thisWeekAppts.push(appt);
@@ -181,7 +179,7 @@ var Week = React.createClass({
 
     if (currentSitter) {
       return (
-        <div>
+        <div className="hours">
           <WeekdayLabels dateRange={ this.props.dateRange }/>
           {hours}
         </div>

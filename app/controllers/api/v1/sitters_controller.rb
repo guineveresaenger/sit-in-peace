@@ -6,7 +6,14 @@ class Api::V1::SittersController < Api::V1::BaseController
   end
 
   def create
-    respond_with :api, :v1, Sitter.create(sitter_params)
+    sitter = Sitter.new(sitter_params)
+    if sitter.save
+      puts "YAY SITTER CREATED"
+
+    else
+      puts "NOOOOOOO YOU CANT USE THE SAME NAME"
+    end
+    respond_with :api, :v1, sitter
   end
 
   def update

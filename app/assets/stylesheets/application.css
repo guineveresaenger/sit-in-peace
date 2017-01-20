@@ -14,7 +14,7 @@
  *= require_self
  */
 body {
-  background-color: lightgreen;
+  background-color: #b8f2a4;
 }
 
 .column {
@@ -23,8 +23,14 @@ body {
 
 .button {
   margin: 10px;
+  border-radius: 10px;
+  border: 1px solid #165914;
 }
 
+
+div.hours {
+  background-color: white;
+}
 div.slot {
   height: 60px;
   overflow: auto;
@@ -36,14 +42,15 @@ div.empty-div {
 }
 
 div.red {
-  background-color: red;
+  background-color: #e84c4c;
 }
 
 div.blue {
-  background-color: blue;
+  background-color: #4286f4;
 }
 
 div.day-header {
   height: 80px;
-  background-color: darkgreen;
+  background-color: #165914;
+  color: white;
 }
