@@ -35,6 +35,15 @@ div.empty-div {
   height: 58px;
 }
 
+div.red {
+  background-color: red;
+}
+
+div.blue {
+  background-color: blue;
+}
+
 div.day-header {
   height: 80px;
+  background-color: darkgreen;
 }

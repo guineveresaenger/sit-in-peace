@@ -159,9 +159,8 @@ var Week = React.createClass({
 
   render() {
     console.log(this.state.currentAppointment);
+    currentSitter = this.props.currentSitter;
     // make 24 table rows!
-    // var weekAppts =this.filterByWeek();
-    // var userAppts = this.filterByUser(weekAppts);
     var hours = [];
     for (var i = 0; i < 24; i++){
       hours.push(
@@ -179,27 +178,38 @@ var Week = React.createClass({
         </div>
       );
     }
-    return (
-      <div>
-        {this.state.showDetails ?
-          <button onClick={this.onButtonClick} className="button">Hide Details
-          </button> :
-          <button onClick={this.onButtonClick} className="button">Add a new appointment!</button>
-        }
-        { this.state.showDetails ?
-          <AppointmentDetails
-          appointment={ this.state.currentAppointment }
-          handleEdit={ this.handleEdit }
-          handleDelete={ this.handleDelete }
-          handleSubmit={this.handleSubmit}
-          sitters={ this.state.sitters }
-          messageSitter={ this.messageSitter }
-          currentDay={ this.state.currentDay }
-          currentHour={ this.state.currentHour }
-          /> : null}
-        <WeekdayLabels dateRange={ this.props.dateRange }/>
-        {hours}
-      </div>
-    )
+
+    if (currentSitter) {
+      return (
+        <div>
+          <WeekdayLabels dateRange={ this.props.dateRange }/>
+          {hours}
+        </div>
+      )
+    } else {
+      return (
+        <div>
+
+          {this.state.showDetails ?
+            <button onClick={this.onButtonClick} className="button">Hide Details
+            </button> :
+            <button onClick={this.onButtonClick} className="button">Add a new appointment!</button>
+          }
+          { this.state.showDetails ?
+            <AppointmentDetails
+            appointment={ this.state.currentAppointment }
+            handleEdit={ this.handleEdit }
+            handleDelete={ this.handleDelete }
+            handleSubmit={this.handleSubmit}
+            sitters={ this.state.sitters }
+            messageSitter={ this.messageSitter }
+            currentDay={ this.state.currentDay }
+            currentHour={ this.state.currentHour }
+            /> : null}
+          <WeekdayLabels dateRange={ this.props.dateRange }/>
+          {hours}
+        </div>
+      )
+    }
   }
 });
