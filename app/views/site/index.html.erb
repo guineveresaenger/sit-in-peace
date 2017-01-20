@@ -1,5 +1,16 @@
 <h1>Listing Appointments</h1>
 
+<div>
+  <% if current_sitter %>
+    Signed in as <strong><%= current_sitter.name %></strong>!
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+    <%= link_to "I am the Parent", parents_index_path %>
+<% end %>
+</div>
+
 <p>Here's the current, logged in, sitter:</p>
 
 <% if @current_sitter %>
@@ -7,4 +18,8 @@
   <%= @current_sitter.id %>
 <% end %>
 
-<%= react_component 'Main', {currentSitter: @current_sitter}  %>
+<% if @current_sitter %>
+  <%= react_component 'Main', {currentSitter: @current_sitter}  %>
+<% else %>
+  <p>You need to login to see the schedule!</p>
+<% end %>
