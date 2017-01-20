@@ -2,18 +2,12 @@ class Api::V1::SittersController < Api::V1::BaseController
   # before_action :set_sitter, only: [:show, :edit, :update, :destroy]
 
   def index
-    respond_with Sitter.all
+    sitters = Sitter.all
+    render json: sitters.as_json(only: [:id, :name, :phone, :email]), status: :ok
   end
 
   def create
-    sitter = Sitter.new(sitter_params)
-    if sitter.save
-      puts "YAY SITTER CREATED"
-
-    else
-      puts "NOOOOOOO YOU CANT USE THE SAME NAME"
-    end
-    respond_with :api, :v1, sitter
+    respond_with :api, :v1, Sitter.create(sitter_params)
   end
 
   def update

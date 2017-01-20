@@ -1,8 +1,6 @@
 class ParentsController < ApplicationController
-  puts ENV["PARENT_NAME"]
-  puts ENV["PARENT_PASSWORD"]
 
-  http_basic_authenticate_with name: "hello", password: "hello"
+  http_basic_authenticate_with name: ENV["PARENT_NAME"], password: ENV["PARENT_PASSWORD"]
 
   def index; end
 

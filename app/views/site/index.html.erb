@@ -1,5 +1,9 @@
 <h1>Listing Appointments</h1>
 
+<% if @error %>
+  <h3><%= @error %></h3>
+<% end %>
+
 <div>
   <% if current_sitter %>
     Signed in as <strong><%= current_sitter.name %></strong>!
@@ -10,13 +14,6 @@
     <%= link_to "I am the Parent", parents_index_path %>
 <% end %>
 </div>
-
-<p>Here's the current, logged in, sitter:</p>
-
-<% if @current_sitter %>
-  <%= @current_sitter.name %>
-  <%= @current_sitter.id %>
-<% end %>
 
 <% if @current_sitter %>
   <%= react_component 'Main', {currentSitter: @current_sitter}  %>

@@ -10,7 +10,7 @@ class Sitter < ActiveRecord::Base
       sitter.name = auth.info.name
       sitter.oauth_token = auth.credentials.token
       sitter.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      sitter.save!
+      return sitter
     end
   end
 

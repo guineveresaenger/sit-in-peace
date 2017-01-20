@@ -27,14 +27,14 @@ body {
   border: 1px solid #165914;
 }
 
-
 div.hours {
-  background-color: white;
+
 }
 div.slot {
   height: 60px;
   overflow: auto;
   border: 1px solid black;
+  background-color: white;
 }
 
 div.empty-div {
