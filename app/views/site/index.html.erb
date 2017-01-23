@@ -1,4 +1,4 @@
-<h1>Listing Appointments</h1>
+<h1>My Babysitting Schedule</h1>
 
 <% if @error %>
   <h3><%= @error %></h3>
@@ -6,17 +6,17 @@
 
 <div>
   <% if current_sitter %>
-    Signed in as <strong><%= current_sitter.name %></strong>!
+    Signed in as <%= current_sitter.name %>
     <%= link_to "Sign out", signout_path, id: "sign_out" %>
   <% else %>
-    <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-    <%= link_to "I am the Parent", parents_index_path %>
+    <p class="sign-in-spacing"><%= link_to "Sign in with Google", "/auth/google_oauth2", class: "sign-in" %></p>
+    <p class="sign-in-spacing"><%= link_to "Sign in with Facebook", "/auth/facebook", class: "sign-in" %></p>
+    <p class="sign-in-spacing"><%= link_to "I am the Parent", parents_index_path, class: "sign-in" %></p>
 <% end %>
 </div>
 
 <% if @current_sitter %>
   <%= react_component 'Main', {currentSitter: @current_sitter}  %>
 <% else %>
-  <p>You need to login to see the schedule!</p>
+  <p class="sign-in-spacing">Please login to see the schedule.</p>
 <% end %>

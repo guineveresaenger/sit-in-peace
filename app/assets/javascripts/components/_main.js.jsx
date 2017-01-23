@@ -34,9 +34,9 @@ var Main = React.createClass({
     }
     return (
             <div>
-              <button className='button success' onClick={this.displayNextWeek}>Next week</button>
-              <button className='button success' onClick={this.displayPreviousWeek}>Previous week</button>
-              <button className='button success' onClick={this.displayCurrentWeek}>Current week</button>
+              <button className='show-week' onClick={this.displayNextWeek}>Next week</button>
+              <button className='show-week' onClick={this.displayPreviousWeek}>Previous week</button>
+              <button className='show-week' onClick={this.displayCurrentWeek}>Current week</button>
 
               <Week
                 startOfWeek={startOfWeek}

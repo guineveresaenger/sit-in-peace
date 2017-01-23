@@ -21,8 +21,33 @@ body {
 
 }
 
+a.links {
+
+}
+
+a.sign-in, a.links, button.show-week {
+  border: 2px solid #165914;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 1.5em;
+  color: #165914;
+  padding: 5px;
+
+}
+
+button.show-week {
+  margin-top: 30px;
+  margin-right: 20px;
+}
+
+p.sign-in-spacing {
+  margin-top: 30px;
+}
+
 .button {
   margin: 10px;
+  margin-top: 30px;
+  margin-left: 20px;
   border-radius: 10px;
   border: 1px solid #165914;
 }
@@ -31,7 +56,7 @@ div.top-spacing {
   height: 20px;
 }
 
-div.sitter-list, h1 {
+div.sitter-list, h1, p.sign-in-spacing, a.links, button.show-week{
   margin-left: 20px;
 }
 
