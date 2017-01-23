@@ -1,0 +1,5 @@
+version: 1
+cron:
+ - name: "reminder"
+   url: "/messages/remind"
+   schedule: "* * * * *"
