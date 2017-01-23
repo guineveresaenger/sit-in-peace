@@ -187,9 +187,8 @@ var AppointmentDetails = React.createClass({
         <input type='date' value={ this.state.date } onChange={ this.handleDateChange }/>
         <input value={ this.state.hour } onChange={ this.handleHourChange } placeholder="00:00"/>
         <input value={ this.state.description } onChange={ this.handleDescriptionChange } placeholder='Enter the description of the appointment'/>
-
-        Pick a sitter:
-        Current sitter: {this.state.sitter_name}
+        // TODO: clean up this input form, for it is weird.
+        <p>Select a sitter</p>
         <select value={this.state.sitter_name} onChange={this.handleSitterChange}>
           <option value={''}> --No Sitter-- </option>
           {sitterChoices}
