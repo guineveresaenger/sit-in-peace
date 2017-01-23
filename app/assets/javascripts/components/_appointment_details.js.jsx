@@ -36,8 +36,8 @@ var AppointmentDetails = React.createClass({
       date = props.appointment.start_time.substr(0,10);
       hour = props.appointment.start_time.substr(11,5);
       description = props.appointment.description;
-      if(this.findSitterByID(props.appointment.sitter_id)){
-        sitterName = props.appointment.sitter_id;
+      if(this.findSitterByID(props.appointment.sitter_id)) {
+        sitterName = this.findSitterByID(props.appointment.sitter_id).name;
       } else{
         sitterName = '';
       }
@@ -189,6 +189,7 @@ var AppointmentDetails = React.createClass({
         <input value={ this.state.description } onChange={ this.handleDescriptionChange } placeholder='Enter the description of the appointment'/>
 
         Pick a sitter:
+        Current sitter: {this.state.sitter_name}
         <select value={this.state.sitter_name} onChange={this.handleSitterChange}>
           <option value={''}> --No Sitter-- </option>
           {sitterChoices}
