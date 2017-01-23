@@ -1,7 +1,5 @@
 class MessagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
- #skip_before_filter :authenticate_user!, :only => "reply"
-
   def reply
     boot_twilio
     message_body = params["Body"]
@@ -29,10 +27,9 @@ class MessagesController < ApplicationController
       )
       appointment.update_attribute(:sitter_id, sitter.id)
       # also send confirmation to Parent (me!!)
-      # TODO: use Parent info; clean up info sent along in confirmation.
       @client.account.messages.create(
         from: ENV["TWILIO_NUMBER"],
-        to: 2065187269,
+        to: ENV["PARENT_NUMBER"],
         body: "#{sitter.name} is taking care of an appointment for you."
       )
     end
@@ -49,7 +46,7 @@ class MessagesController < ApplicationController
       body: body,
     )
 
-    redirect_to root_path
+    redirect_to parents_index_path
 
   end
 
@@ -75,8 +72,8 @@ class MessagesController < ApplicationController
   private
 
   def boot_twilio
-    account_sid = ENV["ACCOUNT_SID"]
-    auth_token = ENV["AUTH_TOKEN"]
+    account_sid = ENV["TWILIO_ACCOUNT_SID"]
+    auth_token = ENV["TWILIO_AUTH_TOKEN"]
     @client = Twilio::REST::Client.new account_sid, auth_token
   end
 end
