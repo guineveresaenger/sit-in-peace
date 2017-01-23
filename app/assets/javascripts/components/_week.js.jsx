@@ -97,18 +97,6 @@ var Week = React.createClass({
     return thisWeekAppts;
   },
 
-  // filterByUser(appointments) {
-  //   var userAppointments = [];
-  //   appointments.map((appt) => {
-  //     for(var i = 0; i < appointments.length; i++) {
-  //       if(appt.sitter_id == 1) {
-  //         userAppointments.push(appt);
-  //       }
-  //     }
-  //   });
-  //   return userAppointments;
-  // },
-
   getDetails(id){
     var thisAppointment = this.state.appointments.find((appointment) => {
       return appointment.id == id;

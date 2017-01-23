@@ -22,8 +22,8 @@ var NewSitter = React.createClass({
   render() {
     return (
       <div>
-        <input ref='name' placeholder="Enter the sitter's name" />
-        <input ref='phone' placeholder='1234567890' />
+        <input ref='name' placeholder="Enter the sitter's name" /><br></br>
+        <input ref='phone' placeholder='Enter a ten-digit number, e.g. 1234567890' /><br></br>
         <input ref='email' placeholder="Enter the sitter's email" />
         <button onClick={this.handleClick} className="button">
           Submit

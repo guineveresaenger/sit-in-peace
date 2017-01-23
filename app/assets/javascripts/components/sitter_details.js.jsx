@@ -10,8 +10,8 @@ var SitterDetails = React.createClass({
     this.setState({editable: !this.state.editable});
     if(this.state.editable) {
       var name = this.refs.name.value;
-      var phone = this.props.sitter.phone;
-      var email = this.props.sitter.email;
+      var phone = this.refs.phone.value;
+      var email = this.refs.email.value;
       var sitter = {
         id: this.props.sitter.id,
         name: name,
@@ -29,10 +29,10 @@ var SitterDetails = React.createClass({
   },
 
   render() {
-    var name = this.state.editable ? <input type='text' ref='name' defaultValue={this.props.sitter.name} /> : <h5>{this.props.sitter.name}</h5>;
-    var phone = this.state.editable? <input type='text' ref='name' defaultValue={this.props.sitter.phone} /> :
+    var name = this.state.editable ? <input type='text' ref='name' defaultValue={this.props.sitter.name} placeholder="Enter the sitter's name"/> : <h5>{this.props.sitter.name}</h5>;
+    var phone = this.state.editable? <input type='text' ref='phone' defaultValue={this.props.sitter.phone} placeholder='Enter a ten-digit number, e.g. 1234567890' /> :
     <p>{this.props.sitter.phone}</p>
-    var email = this.state.editable? <input type='text' ref='name' defaultValue={this.props.sitter.email} /> :
+    var email = this.state.editable? <input type='text' ref='email' defaultValue={this.props.sitter.email} placeholder="Enter the sitter's email"/> :
     <p>{this.props.sitter.email}</p>
 
     return(
