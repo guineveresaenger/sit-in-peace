@@ -27,9 +27,14 @@ body {
   border: 1px solid #165914;
 }
 
-div.hours {
-
+div.top-spacing {
+  height: 20px;
 }
+
+div.sitter-list, h1 {
+  margin-left: 20px;
+}
+
 div.slot {
   height: 60px;
   overflow: auto;

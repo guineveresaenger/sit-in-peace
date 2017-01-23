@@ -23,14 +23,26 @@ var SitterDetails = React.createClass({
     this.setState({editable: !this.state.editable});
   },
 
+  cancelEdit() {
+    console.log("clicked Cancel Edit");
+    this.setState({editable: !this.state.editable})
+  },
+
   render() {
     var name = this.state.editable ? <input type='text' ref='name' defaultValue={this.props.sitter.name} /> : <h5>{this.props.sitter.name}</h5>;
+    var phone = this.state.editable? <input type='text' ref='name' defaultValue={this.props.sitter.phone} /> :
+    <p>{this.props.sitter.phone}</p>
+    var email = this.state.editable? <input type='text' ref='name' defaultValue={this.props.sitter.email} /> :
+    <p>{this.props.sitter.email}</p>
 
     return(
-      <div>
-        { this.props.sitter.id }
+      <div className="sitter-list">
+        <div className="top-spacing"></div>
         {name}
-          <button onClick={this.handleDelete} >Delete</button> <button onClick={this.handleEdit}> {this.state.editable ? 'Submit' : 'Edit' } </button>
+        {phone}
+        {email}
+          <button onClick={this.handleDelete} className='button alert'>Delete</button> <button onClick={this.handleEdit} className='button'> {this.state.editable ? 'Submit' : 'Edit' } </button>
+          {this.state.editable ? <button onClick={this.cancelEdit} className="button secondary">Cancel Edit</button> : null}
       </div>
     )
   }
