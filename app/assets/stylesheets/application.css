@@ -44,9 +44,13 @@ p.sign-in-spacing {
   margin-top: 30px;
 }
 
+div.calendar-spacing {
+  margin-top: 50px;
+}
+
 .button {
   margin: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 20px;
   border-radius: 10px;
   border: 1px solid #165914;
@@ -58,6 +62,17 @@ div.top-spacing {
 
 div.sitter-list, h1, p.sign-in-spacing, a.links, button.show-week{
   margin-left: 20px;
+}
+
+input.input-field {
+  height: 40px;
+  font-size: 1.2em;
+  width: 80%;
+  margin-top: 30px;
+}
+
+select.input-field {
+  margin-top: 30px;
 }
 
 div.slot {

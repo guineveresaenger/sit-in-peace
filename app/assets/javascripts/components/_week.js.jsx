@@ -192,6 +192,7 @@ var Week = React.createClass({
             currentDay={ this.state.currentDay }
             currentHour={ this.state.currentHour }
             /> : null}
+          <div className="calendar-spacing"></div>  
           <WeekdayLabels dateRange={ this.props.dateRange }/>
           {hours}
         </div>

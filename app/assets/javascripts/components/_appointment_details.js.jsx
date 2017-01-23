@@ -185,12 +185,11 @@ var AppointmentDetails = React.createClass({
     return(
       <div>
         <input type='date' value={ this.state.date } onChange={ this.handleDateChange }/>
-        <input value={ this.state.hour } onChange={ this.handleHourChange } placeholder="00:00"/>
-        <input value={ this.state.description } onChange={ this.handleDescriptionChange } placeholder='Enter the description of the appointment'/>
-        // TODO: clean up this input form, for it is weird.
-        <p>Select a sitter</p>
-        <select value={this.state.sitter_name} onChange={this.handleSitterChange}>
-          <option value={''}> --No Sitter-- </option>
+        <input value={ this.state.hour } onChange={ this.handleHourChange } placeholder="Enter a time, e.g. '00:00'" className='input-field'/><br></br>
+        <input value={ this.state.description } onChange={ this.handleDescriptionChange } placeholder='Enter the description of the appointment' className='input-field'/>
+        <div className='top-spacing'></div>
+        <select value={this.state.sitter_name} onChange={this.handleSitterChange} className='input-field'>
+          <option value={''}> --No Sitter-- (Select a Sitter) </option>
           {sitterChoices}
         </select>
 
