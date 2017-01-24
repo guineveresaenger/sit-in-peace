@@ -144,7 +144,7 @@ var Week = React.createClass({
   },
 
   render() {
-    console.log(this.state.currentAppointment);
+    // console.log(this.state.currentAppointment);
     currentSitter = this.props.currentSitter;
     // make 24 table rows!
     var hours = [];

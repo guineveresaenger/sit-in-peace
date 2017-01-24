@@ -173,7 +173,7 @@ var AppointmentDetails = React.createClass({
   },
 
   render() {
-    console.log(this.props.appointment);
+    // console.log(this.props.appointment);
     var sitterChoices = [];
     for(var i = 0; i < this.props.sitters.length; i++){
       sitterChoices.push(
