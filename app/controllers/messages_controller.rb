@@ -52,12 +52,17 @@ class MessagesController < ApplicationController
 
   def remind
     boot_twilio
+    logger.debug "sent reminder!"
 
     appointments = Appointment.all
     appointments.each do |appointment|
       if ((appointment.start_time - 1.day) < Time.now) && (appointment.sitter_id) && (appointment.reminder_sent == false)
         # find sitter
-        sitter = Sitter.find(appointment.sitter_id)
+        if Sitter.find(appointment.sitter_id)
+          sitter = Sitter.find(appointment.sitter_id)
+        else
+          next
+        end
         body = "Hello, this is Guinevere, sending you a reminder about babysitting Brendan tomorrow. Details: #{appointment.start_time.strftime("%B %-d at %l%P")}: #{appointment.description}. Thanks again and see you soon!"
         @client.account.messages.create(
           from: ENV["TWILIO_NUMBER"],
@@ -67,7 +72,6 @@ class MessagesController < ApplicationController
         appointment.update_attribute(:reminder_sent, true)
       end
     end
-    logger.debug "sent reminder!"
   end
 
   private
