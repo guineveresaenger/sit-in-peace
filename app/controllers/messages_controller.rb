@@ -67,6 +67,7 @@ class MessagesController < ApplicationController
         appointment.update_attribute(:reminder_sent, true)
       end
     end
+    logger.debug "sent reminder!"
   end
 
   private
