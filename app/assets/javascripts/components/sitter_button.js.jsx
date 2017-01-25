@@ -22,9 +22,9 @@ var SitterButton = React.createClass({
     return(
       <div>
         {this.state.buttonClicked ?
-          <button className="button secondary" onClick={this.handleUnclick.bind(this, this.props.sitter)}> Unselect {this.props.sitter.name}
+          <button className="sitter-unselect" onClick={this.handleUnclick.bind(this, this.props.sitter)}> Unselect {this.props.sitter.name}
           </button> :
-          <button className="button" onClick={this.handleClick.bind(this, this.props.sitter)}>
+          <button className="sitter-select" onClick={this.handleClick.bind(this, this.props.sitter)}>
             Select {this.props.sitter.name}
           </button>
         }

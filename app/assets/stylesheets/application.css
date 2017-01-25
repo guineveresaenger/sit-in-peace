@@ -32,12 +32,35 @@ a.sign-in, a.links, button.show-week {
   font-size: 1.5em;
   color: #165914;
   padding: 5px;
+}
 
+a#sign-out {
+  border: 2px solid #9b0d0d;
+  border-radius: 10px;
+  background-color: white;
+  color: #9b0d0d;
+  padding: 5px;
 }
 
 button.show-week {
   margin-top: 30px;
   margin-right: 20px;
+}
+
+button.sitter-select{
+  background-color: white
+}
+
+button.sitter-unselect{
+  background-color: grey
+}
+
+button.sitter-select, button.sitter-unselect{
+  font-size: 1.5em;
+  color:  #165914;
+  padding: 5px;
+  margin: 5px;
+  text-decoration: underline;
 }
 
 p.sign-in-spacing {
@@ -56,18 +79,14 @@ div.top-spacing {
   height: 20px;
 }
 
-div.sitter-list, h1, p.sign-in-spacing, a.links, button.show-week{
+div.sitter-list, h1, p.sign-in-spacing, div.sign-in-spacing, a.links, button.show-week{
   margin-left: 20px;
 }
 
-input.input-field {
+input.input-field, select.input-field {
   height: 40px;
   font-size: 1.2em;
   width: 80%;
-  margin-top: 30px;
-}
-
-select.input-field {
   margin-top: 30px;
 }
 
@@ -83,11 +102,14 @@ div.empty-div {
 }
 
 div.red {
-  background-color: #e84c4c;
+  color: #e84c4c;
+  font-weight: bold;
 }
 
-div.blue {
-  background-color: #4286f4;
+div.green {
+  color: #165914;
+  font-weight: bold;
+
 }
 
 div.day-header {

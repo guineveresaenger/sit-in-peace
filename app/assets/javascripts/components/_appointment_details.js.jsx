@@ -184,7 +184,7 @@ var AppointmentDetails = React.createClass({
     }
     return(
       <div>
-        <input type='date' value={ this.state.date } onChange={ this.handleDateChange }/>
+        <input type='date' value={ this.state.date } onChange={ this.handleDateChange } className='input-field'/>
         <input value={ this.state.hour } onChange={ this.handleHourChange } placeholder="Enter a time, e.g. '00:00'" className='input-field'/><br></br>
         <input value={ this.state.description } onChange={ this.handleDescriptionChange } placeholder='Enter the description of the appointment' className='input-field'/>
         <div className='top-spacing'></div>
@@ -193,7 +193,7 @@ var AppointmentDetails = React.createClass({
           {sitterChoices}
         </select>
 
-        <button onClick={this.toggleMessageSitters} className='button'>
+        <button onClick={this.toggleMessageSitters} className='button success'>
           Select sitters to message
         </button>
 
@@ -206,10 +206,10 @@ var AppointmentDetails = React.createClass({
 
         {this.props.appointment ?
         <div>
-          <button className='button' onClick={ this.handleEdit }>
+          <button className='button success' onClick={ this.handleEdit }>
             Update
           </button>
-          <button className='button' onClick={ this.handleDelete }>
+          <button className='button alert' onClick={ this.handleDelete }>
             Delete
           </button>
         </div> :

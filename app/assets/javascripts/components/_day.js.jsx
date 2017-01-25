@@ -32,7 +32,7 @@ var Day = React.createClass({
       var sitterName;
       this.findSitter(appt.sitter_id) ? sitterName = this.findSitter(appt.sitter_id).name : sitterName = 'No Sitter'
       return (
-        <div key={appt.id} onClick={this.displayDetails.bind(this, appt.id)} className={`${(sitterName === 'No Sitter') ? 'red' : 'blue'}` }>
+        <div key={appt.id} onClick={this.displayDetails.bind(this, appt.id)} className={`${(sitterName === 'No Sitter') ? 'red' : 'green'}` }>
           {appt.description}<br></br>
           Sitter: {sitterName}
         </div>

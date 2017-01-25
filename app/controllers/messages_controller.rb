@@ -52,10 +52,15 @@ class MessagesController < ApplicationController
 
   def remind
     boot_twilio
-    logger.debug "sent reminder!"
+    # logger.debug "sent reminder!"
 
-    appointments = Appointment.all
+    # TODO fix time zone issue with Time.now grrrr
+
+    appointments = Appointment.where(start_time: ((Time.now-8.hours)..((Time.now - 8.hours) + 1.day)))
+
     appointments.each do |appointment|
+      puts "HEY APPOINTMENT"
+      puts appointment.description
       if ((appointment.start_time - 1.day) < Time.now) && (appointment.sitter_id) && (appointment.reminder_sent == false)
         # find sitter
         if Sitter.find(appointment.sitter_id)
