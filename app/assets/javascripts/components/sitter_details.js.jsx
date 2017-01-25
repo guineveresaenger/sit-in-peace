@@ -41,7 +41,7 @@ var SitterDetails = React.createClass({
         {name}
         {phone}
         {email}
-          <button onClick={this.handleDelete} className='button alert'>Delete</button> <button onClick={this.handleEdit} className='button'> {this.state.editable ? 'Submit' : 'Edit' } </button>
+          <button onClick={this.handleDelete} className='button alert'>Delete</button> <button onClick={this.handleEdit} className='button success'> {this.state.editable ? 'Submit' : 'Edit' } </button>
           {this.state.editable ? <button onClick={this.cancelEdit} className="button secondary">Cancel Edit</button> : null}
       </div>
     )

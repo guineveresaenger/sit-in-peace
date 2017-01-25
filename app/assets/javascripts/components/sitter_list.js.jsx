@@ -21,12 +21,9 @@ var SitterList = React.createClass({
   handleSubmit(sitter){
     var newState = this.state.sitters.concat(sitter);
     this.setState({ sitters: newState, showAddNew: false });
-    console.log("submitted this sitter: " + sitter);
-    console.log("handleSubmit clicked!");
   },
 
   handleEdit(sitter) {
-    console.log("edit handler clicked");
     $.ajax({
       url: `/api/v1/sitters/${ sitter.id }`,
       type: 'PUT',
@@ -37,7 +34,6 @@ var SitterList = React.createClass({
     });
   },
   handleDelete(id){
-    console.log("delete handler called");
     $.ajax({
       url: `/api/v1/sitters/${id}`,
       type: 'DELETE',
@@ -79,7 +75,7 @@ var SitterList = React.createClass({
     }
     return (
       <div>
-        <button onClick={this.onButtonClick} className='button'>Add a new sitter</button>
+        <button onClick={this.onButtonClick} className='button success'>Add a new sitter</button>
         {this.state.showAddNew ? <NewSitter handleSubmit={this.handleSubmit}/> : null}
         {sitterList}
       </div>

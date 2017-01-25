@@ -17,14 +17,6 @@ body {
   background-color: #b8f2a4;
 }
 
-.column {
-
-}
-
-a.links {
-
-}
-
 a.sign-in, a.links, button.show-week {
   border: 2px solid #165914;
   border-radius: 10px;
@@ -47,20 +39,15 @@ button.show-week {
   margin-right: 20px;
 }
 
-button.sitter-select{
-  background-color: white
-}
-
-button.sitter-unselect{
-  background-color: grey
-}
-
 button.sitter-select, button.sitter-unselect{
   font-size: 1.5em;
   color:  #165914;
   padding: 5px;
   margin: 5px;
   text-decoration: underline;
+}
+button.sitter-unselect{
+  color: #e84c4c
 }
 
 p.sign-in-spacing {
@@ -79,7 +66,7 @@ div.top-spacing {
   height: 20px;
 }
 
-div.sitter-list, h1, p.sign-in-spacing, div.sign-in-spacing, a.links, button.show-week{
+div.sitter-list, h1, p.sign-in-spacing, div.sign-in-spacing, a.links, button.show-week, input.input-field, select.input-field, button.sitter-select, button.sitter-unselect{
   margin-left: 20px;
 }
 
@@ -88,6 +75,7 @@ input.input-field, select.input-field {
   font-size: 1.2em;
   width: 80%;
   margin-top: 30px;
+  border-radius: 5px;
 }
 
 div.slot {
@@ -102,7 +90,7 @@ div.empty-div {
 }
 
 div.red {
-  color: #e84c4c;
+  color: #9b0d0d;
   font-weight: bold;
 }
 

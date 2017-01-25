@@ -80,16 +80,30 @@ var AppointmentDetails = React.createClass({
     this.props.handleDelete(this.props.appointment.id)
   },
 
+  fieldsComplete(){
+    if(!this.state.date){
+      alert("Please enter a date.");
+      return false;
+    }
+    if(!this.state.hour) {
+      alert("Please enter the time.");
+      return false;
+    }
+    if(!this.state.description) {
+      alert("Please describe the appointment.");
+      return false;
+    }
+    return true;
+  },
+
   handleSubmit(){
     var date = this.state.date;
     var hour = this.state.hour;
     var description = this.state.description;
 
-    // if(!this.fieldsComplete()){
-    //   return;
-    // }
-
-    // TODO: customize input form so it allows only correctly formatted date
+    if(!this.fieldsComplete()){
+      return;
+    }
 
     // use Moment.js to format into a valid date
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
@@ -173,7 +187,6 @@ var AppointmentDetails = React.createClass({
   },
 
   render() {
-    // console.log(this.props.appointment);
     var sitterChoices = [];
     for(var i = 0; i < this.props.sitters.length; i++){
       sitterChoices.push(
@@ -193,9 +206,11 @@ var AppointmentDetails = React.createClass({
           {sitterChoices}
         </select>
 
-        <button onClick={this.toggleMessageSitters} className='button success'>
-          Select sitters to message
-        </button>
+        {this.state.showMessageSitters ? null :
+          <button onClick={this.toggleMessageSitters} className='button success'>
+            Select sitters to message
+          </button>
+        }
 
         { this.state.showMessageSitters ?
           <SelectSitters sitters= { this.props.sitters } messageSitter={ this.addToPotSitters }

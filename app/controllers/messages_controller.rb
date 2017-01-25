@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
       @client.account.messages.create(
         from: ENV["TWILIO_NUMBER"],
         to: from_number,
-        body: "Thank you so much for helping me out, #{sitter.name}. You're on the schedule. I'll send you a reminder the day before."
+        body: "Thank you so much for helping me out, #{sitter.name}. You're on the schedule. I'll send you a reminder the day before. If you'd like to check out your schedule before then, please visit www.mybabysittingschedule.com "
       )
       appointment.update_attribute(:sitter_id, sitter.id)
       # also send confirmation to Parent (me!!)
