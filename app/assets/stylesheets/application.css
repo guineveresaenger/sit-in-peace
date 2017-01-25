@@ -17,6 +17,38 @@ body {
   background-color: #b8f2a4;
 }
 
+h1 {
+  font-family: 'Rock Salt', cursive;
+}
+
+header {
+  margin-top: 20px;
+  border-bottom: 6px solid #165914;
+}
+
+* {
+margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -4em;
+}
+
+footer, .push {
+  height: 4em;
+}
+
+div.separator {
+  height: 25px;
+}
+
 a.sign-in, a.links, button.show-week {
   border: 2px solid #165914;
   border-radius: 10px;
@@ -54,6 +86,10 @@ div.sign-in-spacing {
   margin-top: 30px;
   margin-right: 20px;
   float: right;
+}
+
+p.sign-in-spacing {
+  margin-bottom: 20px;
 }
 
 .button {
@@ -106,5 +142,5 @@ div.day-header {
   height: 80px;
   background-color: #165914;
   color: white;
-  margin-top: 35px;
+  margin-top: 25px;
 }

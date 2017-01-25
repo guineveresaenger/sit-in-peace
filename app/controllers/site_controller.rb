@@ -1,5 +1,10 @@
 class SiteController < ApplicationController
-  force_ssl
+  force_ssl if: :ssl_configured?
+
+  def ssl_configured?
+    !Rails.env.development?
+  end
+  
   def login; end
 
   def index
