@@ -45,8 +45,17 @@ footer, .push {
   height: 4em;
 }
 
+footer {
+  border-top: 6px solid #165914;
+}
+
 div.separator {
   height: 25px;
+}
+
+div.site-footer {
+  padding-top: 10px;
+
 }
 
 a.sign-in, a.links, button.show-week {
@@ -104,7 +113,7 @@ div.top-spacing {
   height: 20px;
 }
 
-div.sitter-list, h1, .sign-in-spacing, a.links, button.show-week, input.input-field, select.input-field, button.sitter-select, button.sitter-unselect{
+div.sitter-list, h1, .sign-in-spacing, a.links, button.show-week, input.input-field, select.input-field, button.sitter-select, button.sitter-unselect, div.site-footer{
   margin-left: 20px;
 }
 

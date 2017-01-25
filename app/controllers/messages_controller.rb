@@ -11,13 +11,17 @@ class MessagesController < ApplicationController
 
     #if there is already sitter_id, tell sitter appointment is covered, and don't update sitter id.
     if appointment.sitter_id
-      # find actual sitter
-      # TODO: if sitter just replied twice, tell them they've already accepted this commitment. Don't share the covering sitter's name.
       covering_sitter = Sitter.find(appointment.sitter_id)
+      if sitter.name == covering_sitter.name
+        body = "You already accepted this appointment. Thanks again!"
+      else
+        body = "Thank you so much for offering, #{sitter.name}! However, #{covering_sitter.name} is already helping me on this one."
+      end
+
       @client.account.messages.create(
         from: ENV["TWILIO_NUMBER"],
         to: from_number,
-        body: "Thank you so much for offering, #{sitter.name}! However, #{covering_sitter.name} is already helping me on this one."
+        body: body
       )
     else # send confirmation and update sitter_id
       @client.account.messages.create(
@@ -59,10 +63,7 @@ class MessagesController < ApplicationController
     appointments = Appointment.where(start_time: ((Time.now-8.hours)..((Time.now - 8.hours) + 1.day)))
 
     appointments.each do |appointment|
-      puts "HEY APPOINTMENT"
-      puts appointment.description
-      if ((appointment.start_time - 1.day) < Time.now) && (appointment.sitter_id) && (appointment.reminder_sent == false)
-        # find sitter
+      if (appointment.sitter_id) && (appointment.reminder_sent == false)
         if Sitter.find(appointment.sitter_id)
           sitter = Sitter.find(appointment.sitter_id)
         else

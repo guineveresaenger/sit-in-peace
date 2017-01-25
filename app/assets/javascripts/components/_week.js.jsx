@@ -23,7 +23,6 @@ var Week = React.createClass({
   handleSubmit(appointment){
     var newState = this.state.appointments.concat(appointment);
     this.setState({ appointments: newState, showDetails: false });
-    console.log("appointment submitted!");
   },
 
   handleDelete(id) {
@@ -31,14 +30,12 @@ var Week = React.createClass({
       url: `/api/v1/appointments/${id}`,
       type: 'DELETE',
       success:() => {
-        console.log("successfully removed item");
         this.removeAppointmentFromList(id);
       }
     });
   },
 
   handleEdit(appointment){
-    console.log(appointment.id);
     $.ajax({
       url: `/api/v1/appointments/${appointment.id}`,
       type: 'PUT',

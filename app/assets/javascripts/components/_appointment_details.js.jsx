@@ -108,7 +108,6 @@ var AppointmentDetails = React.createClass({
     // use Moment.js to format into a valid date
     var completeTime = moment(date + "T" + hour + "+0000").toDate().toJSON();
 
-    // TODO: make the following lines more concise somehow?
     var sitter_id;
     this.findSitterByName(this.state.sitter_name) ? sitter_id = this.findSitterByName(this.state.sitter_name).id : sitter_id = null
 
