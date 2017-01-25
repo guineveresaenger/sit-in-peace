@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get 'parents/index' => "parents#index"
   get 'parents/sitters' => "parents#sitters"
   get '/sitters' => 'site#sitters'
+  get '/privacypolicy' => "site#privacypolicy"
+  get '/termsofservice' => "site#termsofservice"
 
 
   namespace :api do

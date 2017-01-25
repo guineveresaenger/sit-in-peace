@@ -7,12 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-
+  <header>
+    <div class="site-header">
+      <h1>My Babysitting Schedule</h1>
+    </div>
+  </header>
 
   <div>
     <%= yield %>
   </div>
+
+  <footer>
+    <div class="site-footer">
+
+      <%=link_to "Privacy Policy", privacypolicy_path %>
+      <%=link_to "Terms of Service", termsofservice_path %>
+
+    </div>
+  </footer>
 
 </body>
 </html>

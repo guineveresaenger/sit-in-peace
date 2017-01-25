@@ -6,4 +6,6 @@ class SiteController < ApplicationController
     @current_sitter ||= Sitter.find(session[:sitter_id]) if session[:sitter_id]
   end
 
+  def privacypolicy; end
+
 end

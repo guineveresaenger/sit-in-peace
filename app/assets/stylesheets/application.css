@@ -50,8 +50,10 @@ button.sitter-unselect{
   color: #e84c4c
 }
 
-p.sign-in-spacing {
+div.sign-in-spacing {
   margin-top: 30px;
+  margin-right: 20px;
+  float: right;
 }
 
 .button {
