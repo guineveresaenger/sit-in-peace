@@ -1,4 +1,5 @@
 class SiteController < ApplicationController
+  force_ssl
   def login; end
 
   def index

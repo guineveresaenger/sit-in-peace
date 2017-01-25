@@ -68,7 +68,7 @@ div.top-spacing {
   height: 20px;
 }
 
-div.sitter-list, h1, p.sign-in-spacing, div.sign-in-spacing, a.links, button.show-week, input.input-field, select.input-field, button.sitter-select, button.sitter-unselect{
+div.sitter-list, h1, .sign-in-spacing, a.links, button.show-week, input.input-field, select.input-field, button.sitter-select, button.sitter-unselect{
   margin-left: 20px;
 }
 

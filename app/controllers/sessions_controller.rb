@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
   def create
     sitter = Sitter.from_omniauth(env["omniauth.auth"])
     if Sitter.find_by(name: sitter.name)
